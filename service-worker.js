@@ -1,4 +1,4 @@
-const CACHE_NAME = "inventory-pwa-v5";
+const CACHE_NAME = "inventory-pwa-v6";
 
 const STATIC_FILES = [
   "./",
@@ -15,7 +15,7 @@ const STATIC_FILES = [
 
   "./icon-192.PNG",
   "./icon-512.PNG",
-  "./apple-touch-icon.png"
+  "./apple-touch-icon.PNG"
 ];
 
 // =====================

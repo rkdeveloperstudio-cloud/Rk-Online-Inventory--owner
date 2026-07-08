@@ -13,8 +13,8 @@ const STATIC_FILES = [
   "./style.css",
   "./manifest.json",
 
-  "./icon-192.png",
-  "./icon-512.png",
+  "./icon-192.PNG",
+  "./icon-512.PNG",
   "./apple-touch-icon.png"
 ];
 

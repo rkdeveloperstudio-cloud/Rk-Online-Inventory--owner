@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Sales Summary</title>
+
+<style>
+
+body {
+    font-family: Arial;
+    background: #ebb0e1;
+    padding: 15px;
+}
+
+
+.card {
+
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:15px;
+
+}
+
+
+.amount {
+
+    font-size:32px;
+    font-weight:bold;
+    color:green;
+
+}
+
+
+button {
+
+    width:100%;
+    padding:15px;
+    margin-top:10px;
+
+    background:#6b3262;
+    color:white;
+
+    border:none;
+    border-radius:8px;
+
+    font-size:18px;
+
+}
+
+
+.small {
+
+    color:#666;
+    margin-top:10px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<button onclick="location.href='index.html'">
+← Home
+</button>
+
+
+<h2>
+Sales Summary
+</h2>
+
+
+<div class="card">
+
+
+<div>
+Total Sales
+</div>
+
+
+<div id="salesAmount" class="amount">
+
+0.00
+
+</div>
+
+
+<div id="updatedTime" class="small">
+
+Last Updated : -
+
+</div>
+
+
+</div>
+
+
+<button onclick="refreshSales()">
+
+Refresh Sales
+
+</button>
+
+
+<div id="loading" style="display:none">
+
+Loading...
+
+</div>
+
+
+<script src="sales.js"></script>
+
+
+</body>
+
+</html>

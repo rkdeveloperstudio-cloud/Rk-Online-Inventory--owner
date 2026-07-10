@@ -6,9 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Inventory System</title>
-<link rel="manifest" href="./manifest.json?v=2">
+<link rel="manifest" href="./manifest.json">
 
-<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.PNG">
 
 <meta name="theme-color" content="#1976d2">
 
@@ -63,6 +63,16 @@ RK Inventory
 📊 Sales Summary
 </button>
 
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./service-worker.js")
+        .then(() => console.log("Service Worker registered"))
+        .catch(err => console.log("SW error:", err));
+    });
+}
+</script>
 
 </body>
 

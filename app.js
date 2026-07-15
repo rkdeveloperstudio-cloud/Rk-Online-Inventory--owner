@@ -80,11 +80,11 @@ function formatDate(value) {
 
     const d = new Date(value);
 
-    return d.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric'
-    });
+    const day = d.getDate();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
+
+    return `${day}/${month}/${year}`;
 
 }
 function showResults(data) {

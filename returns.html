@@ -14,9 +14,18 @@ Return Sales
 
 body{
 
-font-family:Arial;
-background:#fc807e;
-padding:15px;
+    font-family:Arial;
+    background:#fc807e;
+    padding:15px;
+    margin:0;
+    box-sizing:border-box;
+    overflow-x:hidden;
+
+}
+
+*{
+
+    box-sizing:border-box;
 
 }
 
@@ -66,37 +75,49 @@ margin-top:5px;
 
 .result{
 
-background:white;
-margin-top:15px;
-padding:10px;
-border-radius:10px;
+    background:white;
+    margin-top:15px;
+    padding:10px;
+    border-radius:10px;
+    width:100%;
+    overflow-x:auto;
 
 }
 
 
 table{
 
-width:100%;
-border-collapse:collapse;
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
 
 }
 
 
-th{
 
-background:#780705;
-color:white;
-padding:8px;
-
-}
-
-
+th,
 td{
 
-padding:8px;
-border-bottom:1px solid #ddd;
+    padding:8px;
+    border-bottom:1px solid #ddd;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    text-align:left;
+    font-size:14px;
+
 
 }
+
+
+
+input,
+select,
+button{
+
+    max-width:100%;
+
+}
+
 
 
 </style>

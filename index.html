@@ -29,13 +29,15 @@ body{
 
     margin:0;
     padding:0;
-    overflow-x:hidden;
+
+    overflow:hidden;
+
 }
 
 
 body{
 
-    min-height:100vh;
+    min-height:100dvh;
 
     font-family:
     "Segoe UI",
@@ -44,44 +46,40 @@ body{
 
 
     background:
-
     linear-gradient(
         135deg,
-        #667eea 0%,
-        #764ba2 45%,
-        #1976d2 100%
+        #667eea,
+        #764ba2,
+        #1976d2
     );
-
-
-    background-attachment:fixed;
 
 }
 
 
-
-/* LIKE WINFORMS PANEL DOCK FILL */
 
 .container{
 
     width:100%;
 
-    min-height:100vh;
+    height:100dvh;
 
-    padding:20px;   /* your WinForms Panel Padding */
+    padding:10px;
+
+    overflow:hidden;
 
 }
 
 
-/* INSIDE PANEL */
 
 .card{
 
     width:100%;
 
-    min-height:calc(100dvh - 20px);
-
+    height:100%;
 
     padding:25px;
+
+    overflow:auto;
 
 
     background:
@@ -92,22 +90,11 @@ body{
     blur(15px);
 
 
-    -webkit-backdrop-filter:
-    blur(15px);
-
-
     border-radius:25px;
-
-
-    border:
-    1px solid rgba(255,255,255,.25);
-
-
-    box-shadow:
-    0 20px 40px rgba(0,0,0,.25);
 
 }
 
+    
 
 h2{
 

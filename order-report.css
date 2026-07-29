@@ -1,0 +1,583 @@
+*{
+    box-sizing:border-box;
+}
+
+
+body{
+
+    margin:0;
+
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+    background:
+    linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+
+    min-height:100vh;
+
+}
+
+
+
+.app-container{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:20px;
+
+}
+
+
+
+/* HEADER */
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px 25px;
+
+    color:white;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,.25),
+        rgba(255,255,255,.10)
+    );
+
+
+    backdrop-filter:blur(12px);
+
+
+    border-radius:20px;
+
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.15);
+
+}
+
+
+
+.page-header h2{
+
+    margin:0;
+
+    font-size:26px;
+
+}
+
+
+
+.back-btn{
+
+    color:white;
+
+    text-decoration:none;
+
+    background:
+    rgba(255,255,255,.2);
+
+    padding:10px 18px;
+
+    border-radius:30px;
+
+    transition:.3s;
+
+}
+
+
+
+.back-btn:hover{
+
+    background:white;
+
+    color:#667eea;
+
+}
+
+
+
+
+
+/* CARDS */
+
+
+.filter-card,
+.table-card{
+
+
+    margin-top:20px;
+
+
+    background:
+    rgba(255,255,255,.92);
+
+
+    padding:25px;
+
+
+    border-radius:20px;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.15);
+
+
+}
+
+
+
+
+
+/* FORM */
+
+
+.row{
+
+    display:flex;
+
+    gap:20px;
+
+    margin-bottom:18px;
+
+}
+
+
+
+.field{
+
+    flex:1;
+
+}
+
+
+
+label{
+
+
+    display:block;
+
+
+    font-weight:600;
+
+
+    color:#444;
+
+
+    margin-bottom:8px;
+
+
+}
+
+
+
+input,
+select{
+
+
+    width:100%;
+
+
+    padding:13px 15px;
+
+
+    border-radius:12px;
+
+
+    border:
+
+    1px solid #ddd;
+
+
+    font-size:15px;
+
+
+    outline:none;
+
+
+    background:white;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+input:focus,
+select:focus{
+
+
+    border-color:#667eea;
+
+
+    box-shadow:
+
+    0 0 0 3px rgba(102,126,234,.15);
+
+
+}
+
+
+
+
+/* BUTTON */
+
+
+button{
+
+
+    border:none;
+
+
+    padding:14px 25px;
+
+
+    border-radius:30px;
+
+
+    cursor:pointer;
+
+
+    font-size:15px;
+
+
+    font-weight:600;
+
+
+    color:white;
+
+
+    background:
+
+
+    linear-gradient(
+
+    135deg,
+
+    #667eea,
+
+    #764ba2
+
+    );
+
+
+    box-shadow:
+
+    0 8px 20px rgba(102,126,234,.35);
+
+
+    transition:.3s;
+
+
+}
+
+
+
+button:hover{
+
+
+    transform:translateY(-2px);
+
+
+    box-shadow:
+
+    0 12px 25px rgba(102,126,234,.45);
+
+
+}
+
+
+
+
+
+/* TABLE HEADER */
+
+
+.table-header{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+.table-header h3{
+
+
+    margin:0;
+
+
+    color:#333;
+
+
+}
+
+
+
+
+/* TABLE */
+
+
+.table-scroll{
+
+
+    overflow-x:auto;
+
+
+    border-radius:15px;
+
+
+}
+
+
+
+table{
+
+
+    width:100%;
+
+
+    border-collapse:collapse;
+
+
+    min-width:700px;
+
+
+}
+
+
+
+thead{
+
+
+    position:sticky;
+
+
+    top:0;
+
+
+}
+
+
+
+th{
+
+
+    background:
+
+
+    linear-gradient(
+
+    135deg,
+
+    #667eea,
+
+    #764ba2
+
+    );
+
+
+    color:white;
+
+
+    padding:15px;
+
+
+    text-align:left;
+
+
+}
+
+
+
+td{
+
+
+    padding:14px;
+
+
+    border-bottom:
+
+    1px solid #eee;
+
+
+    color:#444;
+
+
+}
+
+
+
+tbody tr{
+
+
+    transition:.2s;
+
+
+}
+
+
+
+tbody tr:hover{
+
+
+    background:#f5f7ff;
+
+
+}
+
+
+
+
+
+/* CHECKBOX */
+
+
+input[type="checkbox"]{
+
+
+    width:20px;
+
+
+    height:20px;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+
+
+.reorder-input{
+
+
+    width:90px;
+
+
+}
+
+
+
+
+
+/* MOBILE */
+
+
+@media(max-width:768px){
+
+
+    .app-container{
+
+
+        padding:12px;
+
+
+    }
+
+
+
+    .page-header{
+
+
+        padding:18px;
+
+
+    }
+
+
+
+    .page-header h2{
+
+
+        font-size:20px;
+
+
+    }
+
+
+
+
+    .row{
+
+
+        flex-direction:column;
+
+
+        gap:12px;
+
+
+    }
+
+
+
+    .filter-card,
+    .table-card{
+
+
+        padding:18px;
+
+
+        border-radius:16px;
+
+
+    }
+
+
+
+    button{
+
+
+        width:100%;
+
+
+    }
+
+
+
+    .table-header{
+
+
+        flex-direction:column;
+
+
+        align-items:stretch;
+
+
+        gap:12px;
+
+
+    }
+
+
+}

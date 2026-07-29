@@ -87,6 +87,8 @@ function formatDate(value) {
     return `${day}/${month}/${year}`;
 
 }
+
+
 function showResults(data) {
 
     const div = document.getElementById("results");

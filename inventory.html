@@ -6,97 +6,396 @@
 
    <link rel="manifest" href="./manifest.json">
 
-    <style>
-        body {
-            font-family: Arial;
-            padding: 12px;
-            background: lightskyblue;
-        }
+<style>
 
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 8px;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            background: #1976d2;
-            color: white;
-            border: none;
-            border-radius: 6px;
-        }
-
-        .box {
-            background: white;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-        }
-
-        #results div {
-            background: white;
-            padding: 10px;
-            margin-bottom: 8px;
-            border-radius: 6px;
-        }
-
-        /* SCANNER */
-       #scannerContainer {
-    position: fixed;
-
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    width: 90%;
-    max-width: 420px;
-    height: 180px;
-
-    background: black;
-    border-radius: 12px;
-    overflow: hidden;
-
-    display: none;
-    z-index: 9999;
-
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+*{
+    box-sizing:border-box;
 }
 
-        #scannerVideo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
 
-        .scan-line {
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: blue;
-            top: 50%;
-            animation: move 1.2s infinite;
-        }
+body{
 
-        @keyframes move {
-            0% { top: 10%; }
-            50% { top: 90%; }
-            100% { top: 10%; }
-        }
+    margin:0;
 
-        #closeBtn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: red;
-            color: white;
-            border: none;
-            padding: 5px;
-            font-size: 12px;
-        }
-    </style>
+    min-height:100vh;
+
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2,
+        #1976d2
+    );
+
+
+    padding:15px;
+
+}
+
+
+
+.container{
+
+    max-width:500px;
+
+    margin:auto;
+
+}
+
+
+
+.card{
+
+    background:
+
+    rgba(255,255,255,0.15);
+
+
+    backdrop-filter:blur(15px);
+
+
+    -webkit-backdrop-filter:blur(15px);
+
+
+    border-radius:25px;
+
+
+    padding:20px;
+
+
+    margin-bottom:15px;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.25);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+}
+
+
+
+h3{
+
+    text-align:center;
+
+    color:white;
+
+    font-size:28px;
+
+    margin:20px 0;
+
+}
+
+
+
+h4{
+
+    color:#333;
+
+    margin-top:0;
+
+}
+
+
+
+
+button {
+
+
+    width:100%;
+
+
+    padding:15px;
+
+
+    margin-top:10px;
+
+
+    border:none;
+
+
+    border-radius:15px;
+
+
+    font-size:16px;
+
+
+    font-weight:bold;
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+
+    background:
+
+
+    linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+
+
+    box-shadow:
+
+    0 8px 20px rgba(0,0,0,.2);
+
+
+    transition:.3s;
+
+}
+
+
+
+button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+
+
+input {
+
+
+    width:100%;
+
+
+    padding:14px;
+
+
+    border:none;
+
+
+    border-radius:12px;
+
+
+    font-size:16px;
+
+
+    outline:none;
+
+
+    background:white;
+
+
+    box-shadow:
+
+    inset 0 2px 5px rgba(0,0,0,.1);
+
+}
+
+
+
+
+.box {
+
+
+    background:
+
+    rgba(255,255,255,.85);
+
+
+    padding:18px;
+
+
+    margin-bottom:15px;
+
+
+    border-radius:20px;
+
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.15);
+
+}
+
+
+
+
+#results div {
+
+
+    background:white;
+
+
+    padding:15px;
+
+
+    margin-bottom:10px;
+
+
+    border-radius:15px;
+
+
+    box-shadow:
+
+    0 5px 15px rgba(0,0,0,.15);
+
+}
+
+
+
+/* Scanner */
+
+#scannerContainer {
+
+
+    position:fixed;
+
+
+    top:50%;
+
+
+    left:50%;
+
+
+    transform:translate(-50%,-50%);
+
+
+    width:90%;
+
+
+    max-width:420px;
+
+
+    height:220px;
+
+
+    background:black;
+
+
+    border-radius:20px;
+
+
+    overflow:hidden;
+
+
+    display:none;
+
+
+    z-index:9999;
+
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,.5);
+
+}
+
+
+
+#scannerVideo {
+
+
+    width:100%;
+
+
+    height:100%;
+
+
+    object-fit:cover;
+
+}
+
+
+
+.scan-line {
+
+
+    position:absolute;
+
+
+    width:100%;
+
+
+    height:3px;
+
+
+    background:#00ff88;
+
+
+    top:50%;
+
+
+    animation:move 1.2s infinite;
+
+}
+
+
+
+@keyframes move {
+
+
+    0%{
+        top:10%;
+    }
+
+
+    50%{
+        top:90%;
+    }
+
+
+    100%{
+        top:10%;
+    }
+
+}
+
+
+
+#closeBtn {
+
+
+    position:absolute;
+
+
+    top:10px;
+
+
+    right:10px;
+
+
+    width:auto;
+
+
+    padding:8px 12px;
+
+
+    background:red;
+
+
+    z-index:10;
+
+}
+
+
+</style>
 </head>
 
 <body>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>
+Item Clear Details
+</title>
+
+<style>
+
+body{
+
+    font-family:Arial;
+    background:#fc807e;
+    padding:15px;
+    margin:0;
+    box-sizing:border-box;
+    overflow-x:hidden;
+
+}
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+
+button{
+
+width:100%;
+padding:15px;
+margin:8px 0;
+font-size:18px;
+background:#780705;
+color:white;
+border:none;
+border-radius:8px;
+
+}
+
+
+.card{
+
+background:white;
+padding:15px;
+border-radius:10px;
+margin-top:15px;
+
+}
+
+
+label{
+
+font-weight:bold;
+display:block;
+margin-top:10px;
+
+}
+
+
+input,select{
+
+width:100%;
+padding:12px;
+font-size:16px;
+margin-top:5px;
+
+}
+
+
+.result{
+
+    background:white;
+    margin-top:15px;
+    padding:10px;
+    border-radius:10px;
+    width:100%;
+    overflow-x:auto;
+
+}
+
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+
+}
+
+
+
+th,
+td{
+
+    padding:8px;
+    border-bottom:1px solid #ddd;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    text-align:left;
+    font-size:14px;
+
+
+}
+
+
+
+input,
+select,
+button{
+
+    max-width:100%;
+
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+
+<button onclick="location.href='index.html'">
+
+← HOME
+
+</button>
+
+<button onclick="downloadItemClear()">
+
+⬇ DOWNLOAD
+
+</button>
+
+<div id="status">
+
+</div>
+
+<div class="card">
+
+<label>
+DATE FROM
+</label>
+
+<input 
+type="date"
+id="dateFrom">
+
+<label>
+DATE TO
+</label>
+
+<input 
+type="date"
+id="dateTo">
+
+<label>
+COUNTER NO
+</label>
+
+<select id="counterNo">
+
+<option value="">
+ALL
+</option>
+
+<option value="1">1</option>
+
+<option value="2">2</option>
+
+<option value="3">3</option>
+
+<option value="4">4</option>
+
+<option value="5">5</option>
+
+<option value="6">6</option>
+
+<option value="7">7</option>
+
+<option value="8">8</option>
+
+<option value="9">9</option>
+
+<option value="10">10</option>
+
+</select>
+
+<button onclick="searchItemClear()">
+
+SEARCH
+
+</button>
+
+</div>
+
+<div class="result">
+
+<h3>
+RESULT
+</h3>
+
+<div id="itemClearList">
+
+</div>
+
+</div>
+
+<script src="itemclear.js"></script>
+
+</body>
+
+</html>

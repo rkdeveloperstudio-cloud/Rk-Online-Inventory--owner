@@ -1,14 +1,16 @@
-const CACHE_NAME = "inventory-pwa-v6";
+const CACHE_NAME = "inventory-pwa-v7";
 
 const STATIC_FILES = [
   "./",
   "./index.html",
   "./sales.html",
   "./inventory.html",
+  "./order-report.html",
 
   "./app.js",
   "./sales.js",
   "./inventory.js",
+  "./js/order-report.js",
 
   "./style.css",
   "./manifest.json",

@@ -14,30 +14,329 @@
 
 <style>
 
-body{
-    font-family:Arial;
-    background:#0c306b;
-    color:white;
-    padding:20px;
+*{
+    box-sizing:border-box;
 }
 
-h2{
-    text-align:center;
+
+body{
+
+    margin:0;
+
+    min-height:100vh;
+
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2,
+        #1976d2
+    );
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    padding:20px;
+
 }
+
+
+
+.container{
+
+    width:100%;
+
+    max-width:420px;
+
+}
+
+
+
+.card{
+
+
+    background:
+
+    rgba(255,255,255,0.15);
+
+
+    backdrop-filter:
+    blur(15px);
+
+
+    -webkit-backdrop-filter:
+    blur(15px);
+
+
+    border-radius:25px;
+
+
+    padding:30px;
+
+
+    box-shadow:
+
+    0 20px 40px rgba(0,0,0,0.25);
+
+
+    border:
+
+    1px solid rgba(255,255,255,0.25);
+
+
+}
+
+
+
+h2{
+
+    text-align:center;
+
+    font-size:32px;
+
+    margin-bottom:30px;
+
+
+    color:white;
+
+
+    text-shadow:
+
+    0 3px 10px rgba(0,0,0,.3);
+
+}
+
+
 
 button{
 
+
     width:100%;
+
+
     padding:18px;
-    margin:10px 0;
+
+
+    margin:12px 0;
+
 
     font-size:18px;
 
-    border:none;
-    border-radius:10px;
 
-    background:#1976d2;
+    font-weight:bold;
+
+
+    border:none;
+
+
+    border-radius:15px;
+
+
+    cursor:pointer;
+
+
     color:white;
+
+
+    background:
+
+
+    rgba(255,255,255,0.18);
+
+
+    backdrop-filter:
+    blur(10px);
+
+
+    border:
+
+    1px solid rgba(255,255,255,0.25);
+
+
+
+    transition:
+
+    all .3s ease;
+
+
+}
+
+
+
+button:hover{
+
+
+    transform:
+
+    translateY(-3px);
+
+
+    background:
+
+    rgba(255,255,255,0.30);
+
+
+    box-shadow:
+
+    0 10px 20px rgba(0,0,0,.25);
+
+
+}
+
+
+
+button:active{
+
+
+    transform:
+
+    scale(.97);
+
+
+}
+
+
+
+.footer{
+
+
+    text-align:center;
+
+    margin-top:20px;
+
+    font-size:13px;
+
+    opacity:.8;
+
+}
+
+.menu-list{
+
+    margin-top:20px;
+
+}
+
+
+
+.menu-item{
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+
+    padding:16px;
+
+
+    margin-bottom:12px;
+
+
+    border-radius:18px;
+
+
+    background:
+
+    rgba(255,255,255,0.18);
+
+
+    border:
+
+    1px solid rgba(255,255,255,0.25);
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.menu-item:hover{
+
+    background:
+
+    rgba(255,255,255,0.30);
+
+
+    transform:
+
+    translateX(5px);
+
+}
+
+
+
+.icon{
+
+    font-size:30px;
+
+    width:45px;
+
+    text-align:center;
+
+}
+
+
+
+.text{
+
+    flex:1;
+
+    color:white;
+
+}
+
+
+
+.text strong{
+
+    display:block;
+
+    font-size:17px;
+
+}
+
+
+
+.text span{
+
+    display:block;
+
+    font-size:13px;
+
+    opacity:.8;
+
+    margin-top:4px;
+
+}
+
+
+
+.arrow{
+
+    font-size:30px;
+
+    color:white;
+
+    opacity:.7;
 
 }
 
@@ -49,35 +348,136 @@ button{
 <body>
 
 
+<div class="container">
+
+
+<div class="card">
+
+
 <h2>
-RK Inventory
+📦 RK Inventory
 </h2>
 
 
-<button onclick="location.href='./inventory.html'">
-📦 Inventory Search
-</button>
+
+<div class="menu-list">
 
 
-<button onclick="location.href='./sales.html'">
-📊 Sales Summary
-</button>
+<div class="menu-item"
+onclick="location.href='./inventory.html'">
 
-<button onclick="location.href='./returns.html'">
-↩️ Return Sale Details
-</button>
+<div class="icon">
+📦
+</div>
+
+<div class="text">
+<strong>Inventory Search</strong>
+<span>Search products and stock</span>
+</div>
+
+<div class="arrow">
+›
+</div>
+
+</div>
+
+
+
+<div class="menu-item"
+onclick="location.href='./sales.html'">
+
+<div class="icon">
+📊
+</div>
+
+<div class="text">
+<strong>Sales Summary</strong>
+<span>View sales reports</span>
+</div>
+
+<div class="arrow">
+›
+</div>
+
+</div>
+
+
+
+<div class="menu-item"
+onclick="location.href='./returns.html'">
+
+<div class="icon">
+↩️
+</div>
+
+<div class="text">
+<strong>Return Sale Details</strong>
+<span>Check returned items</span>
+</div>
+
+<div class="arrow">
+›
+</div>
+
+</div>
+
+
+
+<div class="menu-item"
+onclick="location.href='./order-report.html'">
+
+<div class="icon">
+📋
+</div>
+
+<div class="text">
+<strong>Order Report</strong>
+<span>Generate reorder list</span>
+</div>
+
+<div class="arrow">
+›
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<div class="footer">
+RK Inventory Management System
+</div>
+
+
+</div>
+
+
+</div>
+
 
 
 <script>
 if ("serviceWorker" in navigator) {
+
     window.addEventListener("load", function () {
+
         navigator.serviceWorker.register("./service-worker.js")
-        .then(() => console.log("Service Worker registered"))
-        .catch(err => console.log("SW error:", err));
+
+        .then(() =>
+            console.log("Service Worker registered")
+        )
+
+        .catch(err =>
+            console.log("SW error:", err)
+        );
+
     });
+
 }
 </script>
 
-</body>
 
+</body>
 </html>

@@ -21,29 +21,18 @@
 }
 
 
-html,
-body{
-
+html,body{
     width:100%;
     height:100%;
-
     margin:0;
     padding:0;
-
     overflow:hidden;
-
 }
 
 
 body{
 
-    min-height:100dvh;
-
-    font-family:
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
+    font-family:"Segoe UI",Arial,sans-serif;
 
     background:
     linear-gradient(
@@ -57,40 +46,50 @@ body{
 
 
 
-.container{
+.page{
 
     width:100%;
+    height:100%;
 
-    height:100dvh;
+    display:flex;
 
-    padding:10px;
+    justify-content:center;
 
-    overflow:hidden;
+    align-items:center;
+
+    padding:15px;
 
 }
-
 
 
 .card{
 
     width:100%;
-
-    height:100%;
+    max-width:420px;
 
     padding:25px;
 
-    overflow:auto;
+    border-radius:25px;
 
 
     background:
-    rgba(255,255,255,0.15);
+    rgba(255,255,255,0.18);
 
 
     backdrop-filter:
-    blur(15px);
+    blur(20px);
 
 
-    border-radius:25px;
+    -webkit-backdrop-filter:
+    blur(20px);
+
+
+    border:
+    1px solid rgba(255,255,255,.3);
+
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,.25);
 
 }
 
@@ -383,10 +382,9 @@ h2{
 <body>
 
 
-<div class="container">
+<div class="page">
 
-
-<div class="card">
+    <div class="card">
 
 
 <h2>

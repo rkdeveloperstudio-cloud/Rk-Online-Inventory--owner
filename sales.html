@@ -11,6 +11,7 @@
 
 *{
     box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
 
@@ -18,7 +19,6 @@ html,
 body{
 
     width:100%;
-
     min-height:100%;
 
     margin:0;
@@ -26,62 +26,84 @@ body{
 }
 
 
-html{
-
-    background:
-    linear-gradient(
-        135deg,
-        #667eea,
-        #764ba2,
-        #1976d2
-    );
-
-}
-
 
 body{
 
     min-height:100dvh;
 
-    overflow-x:hidden;
+    padding:15px;
 
-    overflow-y:auto;
+    overflow-x:hidden;
 
     font-family:
     "Segoe UI",
     Arial,
     sans-serif;
 
+
     background:
     linear-gradient(
         135deg,
-        #667eea,
-        #764ba2,
-        #1976d2
+        #4f46e5,
+        #6d28d9,
+        #2563eb,
+        #06b6d4
     );
+
+
+    background-size:300% 300%;
+
+
+    animation:
+    gradientMove 12s ease infinite;
 
 }
 
 
-/* HOME BUTTON */
+
+@keyframes gradientMove{
+
+0%{
+    background-position:0% 50%;
+}
+
+50%{
+    background-position:100% 50%;
+}
+
+100%{
+    background-position:0% 50%;
+}
+
+}
+
+
+
+/* BUTTON */
 
 button {
+
 
     width:100%;
 
     max-width:420px;
 
-    padding:16px;
+    padding:17px;
 
-    margin-top:12px;
+
+    margin:12px auto;
+
+    display:block;
 
 
     border:none;
 
-    border-radius:15px;
+
+    border-radius:18px;
 
 
     font-size:18px;
+
 
     font-weight:bold;
 
@@ -89,104 +111,20 @@ button {
     color:white;
 
 
-    background:
-
-    rgba(255,255,255,0.18);
-
-
-    backdrop-filter:
-    blur(10px);
-
-
-    -webkit-backdrop-filter:
-    blur(10px);
-
-
-    border:
-
-    1px solid rgba(255,255,255,0.25);
-
-
     cursor:pointer;
 
 
-    transition:.3s;
-
-}
-
-
-
-button:hover{
-
-    transform:
-    translateY(-3px);
-
-
     background:
 
-    rgba(255,255,255,0.30);
-
-
-}
-
-
-
-
-h2{
-
-    color:white;
-
-    font-size:32px;
-
-    margin:25px 0;
-
-
-    text-align:center;
-
-
-    text-shadow:
-
-    0 5px 15px rgba(0,0,0,.3);
-
-}
-
-
-
-
-
-.card {
-
-
-    width:100%;
-
-    max-width:420px;
-
-
-    margin-top:20px;
-
-
-    padding:25px;
-
-
-    border-radius:25px;
-
-
-
-    background:
-
-    rgba(255,255,255,0.18);
-
+    rgba(255,255,255,.18);
 
 
     backdrop-filter:
-
-    blur(15px);
-
+    blur(12px);
 
 
     -webkit-backdrop-filter:
-
-    blur(15px);
+    blur(12px);
 
 
 
@@ -198,23 +136,192 @@ h2{
 
     box-shadow:
 
-    0 20px 40px rgba(0,0,0,.25);
+    0 15px 30px rgba(0,0,0,.25);
 
 
 
-    color:white;
+    transition:.35s;
 
 
 }
 
 
 
+button:hover{
+
+
+    transform:
+    translateY(-4px);
+
+
+    background:
+
+    rgba(255,255,255,.30);
+
+
+    box-shadow:
+
+    0 20px 40px rgba(0,0,0,.35),
+
+    0 0 20px rgba(255,255,255,.3);
+
+
+}
+
+
+
+button:active{
+
+    transform:scale(.96);
+
+}
+
+
+
+
+h2{
+
+
+    text-align:center;
+
+
+    color:white;
+
+
+    font-size:32px;
+
+
+    margin:25px 0;
+
+
+
+    letter-spacing:1px;
+
+
+
+    text-shadow:
+
+    0 5px 15px rgba(0,0,0,.35),
+
+    0 0 20px rgba(255,255,255,.4);
+
+
+}
+
+
+
+
+
+.card{
+
+
+    width:100%;
+
+
+    max-width:420px;
+
+
+    margin:25px auto;
+
+
+
+    padding:30px;
+
+
+
+    border-radius:30px;
+
+
+
+    background:
+
+    rgba(255,255,255,.14);
+
+
+
+    backdrop-filter:
+
+    blur(22px);
+
+
+
+    -webkit-backdrop-filter:
+
+    blur(22px);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+
+    box-shadow:
+
+
+
+    0 30px 60px rgba(0,0,0,.30),
+
+
+
+    inset 0 1px 1px rgba(255,255,255,.35);
+
+
+
+    color:white;
+
+
+
+    animation:
+
+    floatingCard 5s ease-in-out infinite;
+
+
+}
+
+
+
+@keyframes floatingCard{
+
+
+0%{
+
+transform:translateY(0);
+
+}
+
+
+50%{
+
+transform:translateY(-8px);
+
+}
+
+
+100%{
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+
 .card div:first-child{
 
 
-    font-size:20px;
+    text-align:center;
+
+
+    font-size:22px;
+
 
     font-weight:bold;
+
 
     opacity:.9;
 
@@ -225,19 +332,18 @@ h2{
 
 
 
-.amount {
+.amount{
 
 
-    margin-top:15px;
+    margin-top:20px;
 
 
-    font-size:40px;
+
+    font-size:48px;
 
 
-    font-weight:bold;
 
-
-    color:white;
+    font-weight:900;
 
 
 
@@ -245,9 +351,17 @@ h2{
 
 
 
+    color:white;
+
+
+
     text-shadow:
 
-    0 5px 15px rgba(0,0,0,.3);
+
+    0 5px 15px rgba(0,0,0,.4),
+
+
+    0 0 25px rgba(255,255,255,.5);
 
 
 
@@ -256,19 +370,24 @@ h2{
 
 
 
-.small {
+
+.small{
 
 
-    margin-top:15px;
+    margin-top:20px;
+
 
 
     text-align:center;
 
 
+
     color:white;
 
 
-    opacity:.8;
+
+    opacity:.85;
+
 
 
     font-size:14px;
@@ -279,53 +398,69 @@ h2{
 
 
 
+
 #loading{
+
+
+    text-align:center;
+
 
 
     margin-top:20px;
 
 
+
     color:white;
+
 
 
     font-size:18px;
 
 
+
     font-weight:bold;
 
 
+
 }
-
-
 
 
 
 @media(max-width:600px){
 
 
-    body{
+body{
 
-        padding:15px;
-
-    }
-
-
-    h2{
-
-        font-size:26px;
-
-    }
-
-
-    .amount{
-
-        font-size:34px;
-
-    }
-
+    padding:12px;
 
 }
 
+
+h2{
+
+    font-size:28px;
+
+}
+
+
+.card{
+
+    padding:25px;
+
+    border-radius:25px;
+
+}
+
+
+
+.amount{
+
+    font-size:38px;
+
+}
+
+
+}
 
 
 </style>

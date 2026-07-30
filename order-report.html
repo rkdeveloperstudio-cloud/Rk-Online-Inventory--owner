@@ -619,24 +619,14 @@ select:focus{
 
     width:100%;
 
-    height:500px;
+    margin-top:15px;
 
-    max-height:500px;
+    overflow:hidden;
 
-    overflow-y:auto;
-
-    overflow-x:hidden;
-
-    border-radius:15px;
-
-    background:white;
-
-    position:relative;
-
-    -webkit-overflow-scrolling:touch;
+    border-radius:20px;
 
 }
-
+    
 
 table{
 
@@ -646,22 +636,35 @@ table{
 
     border-collapse:collapse;
 
+    background:
+    rgba(255,255,255,.9);
+
 }
 
 
 th{
 
+    background:
+    linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+
+    color:white;
+
+    padding:10px;
+
+    font-size:13px;
+
     position:sticky;
 
     top:0;
 
-    z-index:5;
-
-    background:#667eea;
-
-    color:white;
+    z-index:2;
 
 }
+
 
 td{
 
@@ -669,25 +672,19 @@ td{
 
     font-size:12px;
 
-    border-bottom:1px solid #eee;
+    color:#333;
+
+    border-bottom:
+    1px solid #ddd;
 
     word-break:break-word;
 
     overflow-wrap:anywhere;
 
 }
+    
 
     th:nth-child(1),
-td:nth-child(1){
-
-    width:35px;
-
-    text-align:center;
-
-}
-
-
-th:nth-child(1),
 td:nth-child(1){
 
     width:35px;
@@ -718,7 +715,7 @@ td:nth-child(4),
 th:nth-child(5),
 td:nth-child(5){
 
-    width:13%;
+    width:12%;
 
     text-align:center;
 
@@ -728,13 +725,11 @@ td:nth-child(5){
 th:nth-child(6),
 td:nth-child(6){
 
-    width:17%;
+    width:15%;
 
     text-align:center;
 
 }
-
-
 
 .reorder{
 

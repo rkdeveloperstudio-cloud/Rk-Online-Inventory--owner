@@ -14,367 +14,360 @@
 
 <style>
 
+/* =========================
+   GLOBAL
+========================= */
+
 *{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
 
 body{
-
-    margin:0;
-
-    width:100%;
-
     min-height:100dvh;
-
     overflow-x:hidden;
-
 
     font-family:
     "Segoe UI",
     Arial,
     sans-serif;
 
+    color:white;
 
     background:
-
     linear-gradient(
         135deg,
-        #667eea,
-        #764ba2,
-        #1976d2
+        #4f46e5 0%,
+        #6d28d9 35%,
+        #2563eb 70%,
+        #06b6d4 100%
     );
 
+    background-size:300% 300%;
+
+    animation:
+    gradientMove 12s ease infinite;
 }
 
+/* Animated gradient */
 
+@keyframes gradientMove{
+
+0%{
+    background-position:0% 50%;
+}
+
+50%{
+    background-position:100% 50%;
+}
+
+100%{
+    background-position:0% 50%;
+}
+
+}
+
+/* =========================
+   PAGE CONTAINER
+========================= */
 
 .container{
-
     width:100%;
-
     min-height:100dvh;
 
-    padding:10px;
+    padding:15px;
 
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
 }
 
-
+/* =========================
+   GLASS CARD
+========================= */
 
 .card{
 
     width:100%;
+    max-width:460px;
 
-    max-width:420px;
+    margin:20px auto;
 
-    margin:auto;
-
-
-    padding:25px;
-
+    padding:26px;
 
     background:
-    rgba(255,255,255,0.15);
-
+    rgba(255,255,255,.14);
 
     backdrop-filter:
-    blur(15px);
-
+    blur(22px);
 
     -webkit-backdrop-filter:
-    blur(15px);
-
-
-    border-radius:25px;
-
+    blur(22px);
 
     border:
-    1px solid rgba(255,255,255,0.25);
+    1px solid rgba(255,255,255,.28);
 
+    border-radius:28px;
 
     box-shadow:
-    0 20px 40px rgba(0,0,0,0.25);
 
+        0 30px 60px rgba(0,0,0,.28),
+
+        inset 0 1px 1px rgba(255,255,255,.35),
+
+        inset 0 -1px 1px rgba(255,255,255,.08);
 }
 
-
+/* =========================
+   TITLE
+========================= */
 
 h2{
-
     text-align:center;
 
-    font-size:32px;
+    font-size:34px;
+    font-weight:700;
+    letter-spacing:.5px;
 
-    margin-bottom:30px;
-
+    margin-bottom:28px;
 
     color:white;
-
 
     text-shadow:
-
-    0 3px 10px rgba(0,0,0,.3);
-
+        0 4px 10px rgba(0,0,0,.25),
+        0 0 20px rgba(255,255,255,.35);
 }
 
-
-
-button{
-
-
-    width:100%;
-
-
-    padding:18px;
-
-
-    margin:12px 0;
-
-
-    font-size:18px;
-
-
-    font-weight:bold;
-
-
-    border:none;
-
-
-    border-radius:15px;
-
-
-    cursor:pointer;
-
-
-    color:white;
-
-
-    background:
-
-
-    rgba(255,255,255,0.18);
-
-
-    backdrop-filter:
-    blur(10px);
-
-
-    border:
-
-    1px solid rgba(255,255,255,0.25);
-
-
-
-    transition:
-
-    all .3s ease;
-
-
-}
-
-
-
-button:hover{
-
-
-    transform:
-
-    translateY(-3px);
-
-
-    background:
-
-    rgba(255,255,255,0.30);
-
-
-    box-shadow:
-
-    0 10px 20px rgba(0,0,0,.25);
-
-
-}
-
-
-
-button:active{
-
-
-    transform:
-
-    scale(.97);
-
-
-}
-
-
-
-.footer{
-
-
-    text-align:center;
-
-    margin-top:20px;
-
-    font-size:13px;
-
-    opacity:.8;
-
-}
+/* =========================
+   MENU LIST
+========================= */
 
 .menu-list{
-
-    margin-top:20px;
-
+    margin-top:10px;
 }
 
-
+/* =========================
+   FLOATING GLASS ITEM
+========================= */
 
 .menu-item{
 
-
     display:flex;
-
     align-items:center;
-
     gap:15px;
 
+    padding:18px;
 
-    padding:16px;
+    margin-bottom:15px;
 
-
-    margin-bottom:12px;
-
-
-    border-radius:18px;
-
+    border-radius:22px;
 
     background:
+    rgba(255,255,255,.12);
 
-    rgba(255,255,255,0.18);
+    backdrop-filter:
+    blur(12px);
 
+    -webkit-backdrop-filter:
+    blur(12px);
 
     border:
+    1px solid rgba(255,255,255,.22);
 
-    1px solid rgba(255,255,255,0.25);
+    box-shadow:
 
+        0 10px 25px rgba(0,0,0,.18),
+
+        inset 0 1px 1px rgba(255,255,255,.25);
 
     cursor:pointer;
 
+    transition:
+        transform .35s ease,
+        background .35s ease,
+        box-shadow .35s ease;
 
-    transition:.3s;
+    animation:
+        floating 4s ease-in-out infinite;
+}
 
+/* Floating animation */
+
+@keyframes floating{
+
+0%{
+    transform:translateY(0);
+}
+
+50%{
+    transform:translateY(-3px);
+}
+
+100%{
+    transform:translateY(0);
+}
 
 }
 
-
+/* Hover / Touch */
 
 .menu-item:hover{
 
+    transform:translateY(-6px);
+
     background:
+    rgba(255,255,255,.22);
 
-    rgba(255,255,255,0.30);
+    box-shadow:
 
+        0 20px 40px rgba(0,0,0,.25),
 
-    transform:
-
-    translateX(5px);
-
+        0 0 22px rgba(102,126,234,.45);
 }
 
+.menu-item:active{
+    transform:scale(.98);
+}
 
+/* =========================
+   ICON
+========================= */
 
 .icon{
 
-    font-size:30px;
-
-    width:45px;
+    width:48px;
+    flex-shrink:0;
 
     text-align:center;
 
+    font-size:30px;
+
+    filter:
+    drop-shadow(0 0 10px rgba(255,255,255,.55));
 }
 
-
+/* =========================
+   TEXT
+========================= */
 
 .text{
-
     flex:1;
-
     color:white;
-
 }
-
-
 
 .text strong{
-
     display:block;
-
     font-size:17px;
-
+    font-weight:600;
 }
-
-
 
 .text span{
-
     display:block;
-
-    font-size:13px;
-
-    opacity:.8;
-
     margin-top:4px;
 
+    font-size:13px;
+    line-height:1.4;
+
+    color:rgba(255,255,255,.82);
 }
 
-
+/* =========================
+   ARROW
+========================= */
 
 .arrow{
 
+    flex-shrink:0;
+
     font-size:30px;
+    font-weight:bold;
 
     color:white;
 
-    opacity:.7;
-
+    text-shadow:
+    0 0 10px rgba(255,255,255,.85);
 }
 
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+
+    margin-top:26px;
+
+    text-align:center;
+
+    font-size:13px;
+    font-weight:500;
+
+    color:rgba(255,255,255,.82);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:600px){
 
-
-
+.container{
+    padding:12px;
+}
 
 .card{
-
-    padding:18px;
-
-    border-radius:20px;
-
+    padding:20px;
+    border-radius:22px;
 }
-
 
 h2{
-
-    font-size:26px;
-
+    font-size:28px;
+    margin-bottom:24px;
 }
-
 
 .menu-item{
-
-    padding:14px;
-
+    padding:15px;
+    gap:12px;
 }
-
 
 .icon{
-
+    width:42px;
     font-size:26px;
+}
+
+.text strong{
+    font-size:16px;
+}
+
+.text span{
+    font-size:12px;
+}
+
+.arrow{
+    font-size:26px;
+}
 
 }
 
+/* Landscape phones */
 
+@media(max-height:520px) and (orientation:landscape){
+
+.container{
+    align-items:flex-start;
+    padding:10px;
+}
+
+.card{
+    margin:10px auto;
+}
 
 }
 

@@ -10,14 +10,27 @@
 
 *{
     box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
+
+
+html,
+body{
+
+    width:100%;
+    min-height:100%;
+
+    margin:0;
+
+}
+
 
 
 body{
 
-    margin:0;
+    min-height:100dvh;
 
-    min-height:100vh;
+    overflow-x:hidden;
 
     font-family:
     "Segoe UI",
@@ -25,111 +38,70 @@ body{
     sans-serif;
 
 
+    padding:15px;
+
+
     background:
 
     linear-gradient(
         135deg,
-        #667eea,
-        #764ba2,
-        #1976d2
+        #4f46e5,
+        #6d28d9,
+        #2563eb,
+        #06b6d4
     );
 
 
-    padding:15px;
+    background-size:300% 300%;
+
+
+    animation:
+    gradientMove 12s ease infinite;
+
 
 }
 
 
 
-.container{
+@keyframes gradientMove{
 
-    max-width:500px;
+0%{
+    background-position:0% 50%;
+}
 
-    margin:auto;
+
+50%{
+    background-position:100% 50%;
+}
+
+
+100%{
+    background-position:0% 50%;
+}
 
 }
 
 
 
-.card{
+/* HOME BUTTON */
 
-    background:
-
-    rgba(255,255,255,0.15);
-
-
-    backdrop-filter:blur(15px);
-
-
-    -webkit-backdrop-filter:blur(15px);
-
-
-    border-radius:25px;
-
-
-    padding:20px;
-
-
-    margin-bottom:15px;
-
-
-    box-shadow:
-
-    0 15px 35px rgba(0,0,0,.25);
-
-
-    border:
-
-    1px solid rgba(255,255,255,.25);
-
-}
-
-
-
-h3{
-
-    text-align:center;
-
-    color:white;
-
-    font-size:28px;
-
-    margin:20px 0;
-
-}
-
-
-
-h4{
-
-    color:#333;
-
-    margin-top:0;
-
-}
-
-
-
-
-button {
-
+button{
 
     width:100%;
 
+    padding:16px;
 
-    padding:15px;
 
-
-    margin-top:10px;
+    margin:10px 0;
 
 
     border:none;
 
 
-    border-radius:15px;
+    border-radius:16px;
 
 
-    font-size:16px;
+    font-size:17px;
 
 
     font-weight:bold;
@@ -143,20 +115,43 @@ button {
 
     background:
 
+    rgba(255,255,255,.18);
 
-    linear-gradient(
-        135deg,
-        #667eea,
-        #764ba2
-    );
+
+
+    backdrop-filter:
+
+    blur(12px);
+
+
+
+    -webkit-backdrop-filter:
+
+    blur(12px);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
 
 
     box-shadow:
 
-    0 8px 20px rgba(0,0,0,.2);
+
+    0 10px 25px rgba(0,0,0,.20),
 
 
-    transition:.3s;
+    inset 0 1px 1px rgba(255,255,255,.25);
+
+
+
+    transition:
+
+    transform .3s,
+    background .3s,
+    box-shadow .3s;
 
 }
 
@@ -164,7 +159,23 @@ button {
 
 button:hover{
 
-    transform:translateY(-2px);
+    transform:
+
+    translateY(-3px);
+
+
+    background:
+
+    rgba(255,255,255,.30);
+
+
+
+    box-shadow:
+
+
+    0 15px 35px rgba(0,0,0,.25),
+
+    0 0 20px rgba(255,255,255,.25);
 
 }
 
@@ -172,97 +183,196 @@ button:hover{
 
 button:active{
 
-    transform:scale(.97);
+    transform:
+
+    scale(.97);
 
 }
 
 
 
-input {
+
+
+h3{
+
+
+    text-align:center;
+
+
+    color:white;
+
+
+    font-size:30px;
+
+
+    margin:20px 0 25px;
+
+
+
+    text-shadow:
+
+
+    0 4px 10px rgba(0,0,0,.3),
+
+    0 0 20px rgba(255,255,255,.4);
+
+
+}
+
+
+
+h4{
+
+    color:white;
+
+    margin-top:0;
+
+    font-size:18px;
+
+}
+
+
+
+
+/* SEARCH BOX */
+
+
+.box{
+
+
+    background:
+
+    rgba(255,255,255,.14);
+
+
+
+    backdrop-filter:
+
+    blur(20px);
+
+
+
+    -webkit-backdrop-filter:
+
+    blur(20px);
+
+
+
+    padding:20px;
+
+
+    margin-bottom:18px;
+
+
+    border-radius:25px;
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+
+    box-shadow:
+
+
+    0 20px 40px rgba(0,0,0,.25),
+
+
+    inset 0 1px 1px rgba(255,255,255,.25);
+
+
+
+}
+
+
+
+
+/* INPUT */
+
+
+input{
 
 
     width:100%;
 
 
-    padding:14px;
+    padding:15px;
 
 
     border:none;
 
 
-    border-radius:12px;
-
-
-    font-size:16px;
-
-
     outline:none;
-
-
-    background:white;
-
-
-    box-shadow:
-
-    inset 0 2px 5px rgba(0,0,0,.1);
-
-}
-
-
-
-
-.box {
-
-
-    background:
-
-    rgba(255,255,255,.85);
-
-
-    padding:18px;
-
-
-    margin-bottom:15px;
-
-
-    border-radius:20px;
-
-
-    box-shadow:
-
-    0 10px 25px rgba(0,0,0,.15);
-
-}
-
-
-
-
-#results div {
-
-
-    background:white;
-
-
-    padding:15px;
-
-
-    margin-bottom:10px;
 
 
     border-radius:15px;
 
 
+
+    font-size:16px;
+
+
+
+    background:
+
+    rgba(255,255,255,.9);
+
+
+
     box-shadow:
 
-    0 5px 15px rgba(0,0,0,.15);
+
+    inset 0 3px 8px rgba(0,0,0,.15);
+
+
 
 }
 
 
 
-/* Scanner */
 
-#scannerContainer {
+/* RESULT CARDS */
+
+
+#results div{
+
+
+    background:
+
+    rgba(255,255,255,.90);
+
+
+
+    padding:15px;
+
+
+
+    margin-bottom:12px;
+
+
+    border-radius:18px;
+
+
+
+    box-shadow:
+
+
+    0 10px 25px rgba(0,0,0,.18);
+
+
+
+}
+
+
+
+
+
+/* SCANNER */
+
+
+#scannerContainer{
 
 
     position:fixed;
@@ -274,7 +384,10 @@ input {
     left:50%;
 
 
-    transform:translate(-50%,-50%);
+    transform:
+
+    translate(-50%,-50%);
+
 
 
     width:90%;
@@ -283,33 +396,48 @@ input {
     max-width:420px;
 
 
+
     height:220px;
+
 
 
     background:black;
 
 
-    border-radius:20px;
+
+    border-radius:25px;
+
 
 
     overflow:hidden;
 
 
+
     display:none;
+
 
 
     z-index:9999;
 
 
+
     box-shadow:
 
-    0 20px 50px rgba(0,0,0,.5);
+
+    0 30px 70px rgba(0,0,0,.5),
+
+
+    0 0 30px rgba(0,255,200,.4);
+
+
 
 }
 
 
 
-#scannerVideo {
+
+
+#scannerVideo{
 
 
     width:100%;
@@ -320,11 +448,14 @@ input {
 
     object-fit:cover;
 
+
 }
 
 
 
-.scan-line {
+
+
+.scan-line{
 
 
     position:absolute;
@@ -336,40 +467,57 @@ input {
     height:3px;
 
 
-    background:#00ff88;
+    background:#00ffcc;
 
 
-    top:50%;
+    box-shadow:
 
 
-    animation:move 1.2s infinite;
+    0 0 15px #00ffcc;
+
+
+
+    animation:
+
+    move 1.2s infinite;
+
 
 }
 
 
 
-@keyframes move {
 
 
-    0%{
-        top:10%;
-    }
+@keyframes move{
 
 
-    50%{
-        top:90%;
-    }
+0%{
+
+top:10%;
+
+}
 
 
-    100%{
-        top:10%;
-    }
+50%{
+
+top:90%;
+
+}
+
+
+100%{
+
+top:10%;
+
+}
+
 
 }
 
 
 
-#closeBtn {
+
+#closeBtn{
 
 
     position:absolute;
@@ -381,19 +529,57 @@ input {
     right:10px;
 
 
+
     width:auto;
 
 
-    padding:8px 12px;
+    padding:8px 14px;
+
 
 
     background:red;
 
 
+
+    color:white;
+
+
+
     z-index:10;
+
+
 
 }
 
+
+
+
+
+@media(max-width:600px){
+
+
+body{
+
+    padding:12px;
+
+}
+
+
+h3{
+
+    font-size:26px;
+
+}
+
+
+.box{
+
+    padding:16px;
+
+}
+
+
+}
 
 </style>
 </head>

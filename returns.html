@@ -14,32 +14,21 @@ Return Sales
 
 *{
     box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
+
 
 
 html,
 body{
 
     width:100%;
-
     min-height:100%;
 
     margin:0;
 
 }
 
-
-html{
-
-    background:
-    linear-gradient(
-        135deg,
-        #667eea,
-        #764ba2,
-        #1976d2
-    );
-
-}
 
 
 body{
@@ -48,22 +37,177 @@ body{
 
     overflow-x:hidden;
 
-    overflow-y:auto;
 
     font-family:
     "Segoe UI",
     Arial,
     sans-serif;
 
+
+
+    padding:15px;
+
+
+
     background:
+
     linear-gradient(
         135deg,
-        #667eea,
-        #764ba2,
-        #1976d2
+        #4f46e5,
+        #6d28d9,
+        #2563eb,
+        #06b6d4
     );
 
+
+    background-size:300% 300%;
+
+
+    animation:
+    gradientMove 12s ease infinite;
+
+
 }
+
+
+
+@keyframes gradientMove{
+
+
+0%{
+    background-position:0% 50%;
+}
+
+
+50%{
+    background-position:100% 50%;
+}
+
+
+100%{
+    background-position:0% 50%;
+}
+
+
+}
+
+
+
+
+
+/* BUTTONS */
+
+
+button{
+
+
+    width:100%;
+
+
+    padding:16px;
+
+
+    margin:10px 0;
+
+
+    font-size:17px;
+
+
+    font-weight:bold;
+
+
+
+    border:none;
+
+
+    border-radius:16px;
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+
+
+    background:
+
+    rgba(255,255,255,.18);
+
+
+
+    backdrop-filter:
+
+    blur(12px);
+
+
+
+    -webkit-backdrop-filter:
+
+    blur(12px);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+
+    box-shadow:
+
+
+    0 10px 25px rgba(0,0,0,.20),
+
+
+    inset 0 1px 1px rgba(255,255,255,.25);
+
+
+
+    transition:.3s;
+
+
+}
+
+
+
+button:hover{
+
+
+    transform:
+
+    translateY(-3px);
+
+
+
+    background:
+
+    rgba(255,255,255,.30);
+
+
+
+    box-shadow:
+
+
+    0 15px 35px rgba(0,0,0,.25);
+
+
+}
+
+
+
+button:active{
+
+
+    transform:
+
+    scale(.97);
+
+
+}
+
+
+
 
 
 
@@ -79,82 +223,43 @@ body{
 
 
 
+
+
 h3{
+
 
     text-align:center;
 
+
     color:white;
 
-    font-size:28px;
+
+    font-size:30px;
+
+
 
     margin:20px 0;
 
-}
+
+    text-shadow:
 
 
+    0 4px 10px rgba(0,0,0,.3),
 
 
-button{
+    0 0 20px rgba(255,255,255,.4);
 
-    width:100%;
-
-    padding:15px;
-
-    margin:10px 0;
-
-
-    font-size:17px;
-
-    font-weight:bold;
-
-
-    border:none;
-
-    border-radius:15px;
-
-
-    color:white;
-
-
-    cursor:pointer;
-
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #667eea,
-        #764ba2
-    );
-
-
-    box-shadow:
-
-    0 8px 20px rgba(0,0,0,.25);
-
-
-    transition:.3s;
 
 
 }
 
 
 
-button:hover{
-
-    transform:translateY(-3px);
-
-}
 
 
 
-button:active{
 
-    transform:scale(.97);
-
-}
-
-
+/* FILTER CARD */
 
 
 .card{
@@ -162,24 +267,55 @@ button:active{
 
     background:
 
-    rgba(255,255,255,.9);
+
+    rgba(255,255,255,.14);
+
+
+
+    backdrop-filter:
+
+    blur(22px);
+
+
+
+    -webkit-backdrop-filter:
+
+    blur(22px);
+
 
 
     padding:20px;
 
 
+
     border-radius:25px;
+
 
 
     margin-top:15px;
 
 
+
+    border:
+
+
+    1px solid rgba(255,255,255,.25);
+
+
+
     box-shadow:
 
-    0 15px 35px rgba(0,0,0,.2);
+
+    0 25px 50px rgba(0,0,0,.25),
+
+
+    inset 0 1px 1px rgba(255,255,255,.25);
+
 
 
 }
+
+
 
 
 
@@ -195,10 +331,13 @@ label{
     margin-top:12px;
 
 
-    color:#444;
+    color:white;
+
 
 
 }
+
+
 
 
 
@@ -216,24 +355,32 @@ select{
     margin-top:6px;
 
 
+
     border:none;
 
 
-    border-radius:12px;
+    outline:none;
+
+
+    border-radius:15px;
 
 
     font-size:16px;
 
 
-    background:white;
+
+    background:
+
+
+    rgba(255,255,255,.90);
+
 
 
     box-shadow:
 
-    inset 0 2px 5px rgba(0,0,0,.1);
 
+    inset 0 3px 8px rgba(0,0,0,.15);
 
-    outline:none;
 
 
 }
@@ -241,26 +388,55 @@ select{
 
 
 
+
+/* RESULT */
+
+
 .result{
 
 
     background:
 
-    rgba(255,255,255,.95);
+
+    rgba(255,255,255,.14);
+
+
+
+    backdrop-filter:
+
+    blur(20px);
+
+
+
+    -webkit-backdrop-filter:
+
+    blur(20px);
+
 
 
     margin-top:20px;
 
 
+
     padding:15px;
+
 
 
     border-radius:25px;
 
 
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+
     box-shadow:
 
-    0 15px 35px rgba(0,0,0,.2);
+
+    0 20px 40px rgba(0,0,0,.25);
+
 
 
     overflow:hidden;
@@ -270,11 +446,10 @@ select{
 
 
 
-
 .result h3{
 
 
-    color:#333;
+    color:white;
 
 
     font-size:22px;
@@ -284,6 +459,8 @@ select{
 
 
 }
+
+
 
 
 
@@ -303,6 +480,8 @@ select{
 
 
 
+
+
 table{
 
 
@@ -312,14 +491,34 @@ table{
     border-collapse:collapse;
 
 
+    background:
+
+    rgba(255,255,255,.85);
+
+
+
+    border-radius:15px;
+
+
+    overflow:hidden;
+
+
 }
+
+
 
 
 
 th{
 
 
-    background:#667eea;
+    background:
+
+    linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
 
 
     color:white;
@@ -332,19 +531,27 @@ th{
 
 
 
+
+
 td{
 
 
     padding:10px;
 
 
-    border-bottom:1px solid #ddd;
+    border-bottom:
+
+    1px solid rgba(0,0,0,.1);
 
 
     font-size:14px;
 
 
+    color:#333;
+
+
 }
+
 
 
 
@@ -358,15 +565,20 @@ td{
     padding:12px;
 
 
+
     text-align:center;
 
 
-    border-radius:12px;
+
+    border-radius:15px;
+
 
 
     background:
 
-    rgba(255,255,255,.8);
+
+    rgba(255,255,255,.85);
+
 
 
     font-weight:bold;
@@ -376,8 +588,48 @@ td{
 
 
 
-</style>
 
+
+
+@media(max-width:600px){
+
+
+body{
+
+    padding:12px;
+
+}
+
+
+
+.card{
+
+    padding:16px;
+
+}
+
+
+
+h3{
+
+    font-size:26px;
+
+}
+
+
+
+button{
+
+    padding:15px;
+
+}
+
+
+
+}
+
+
+</style>
 
 </head>
 

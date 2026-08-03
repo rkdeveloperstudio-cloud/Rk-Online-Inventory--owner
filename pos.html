@@ -1,0 +1,2383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Smart POS Billing</title>
+
+
+<style>
+
+html, body{
+
+    touch-action: manipulation;
+
+}
+
+:root{
+
+    --bg:#062f3a;
+
+    --panel:rgba(255,255,255,0.10);
+
+    --border:rgba(120,230,255,0.35);
+
+    --text:#f8fafc;
+
+
+    /* Primary */
+    --cyan:#38bdf8;
+
+
+    /* Success */
+    --green:#22c55e;
+
+
+    /* Accent */
+    --purple:#a855f7;
+
+
+    /* Danger */
+    --red:#ef4444;
+
+
+    /* New */
+    --orange:#f97316;
+
+    --blue:#2563eb;
+
+}
+
+
+*{
+
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:"Segoe UI",Arial,sans-serif;
+
+}
+
+
+
+body{
+
+    min-height:100vh;
+
+    background:
+    linear-gradient(
+        135deg,
+        #015454,
+        #07374a,
+        #015454
+    );
+
+    color:var(--text);
+
+}
+
+
+.pos-container{
+
+
+    max-width:1400px;
+    margin:auto;
+    padding:20px;
+
+
+}
+
+
+
+
+
+.glass{
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,0.18),
+        rgba(255,255,255,0.05)
+    );
+
+    border:1px solid rgba(255,255,255,0.25);
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+
+    border-radius:25px;
+
+
+    box-shadow:
+
+    /* floating shadow */
+    0 25px 60px rgba(0,0,0,0.45),
+
+    /* bottom depth */
+    0 10px 25px rgba(0,0,0,0.35),
+
+    /* glass inner light */
+    inset 0 1px 2px rgba(255,255,255,0.35),
+
+    /* soft cyan reflection */
+    inset 0 -20px 40px rgba(0,180,255,0.08);
+
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+.glass::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:50%;
+
+
+    background:
+    linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.12),
+        transparent
+    );
+
+
+    pointer-events:none;
+
+}
+
+
+
+.header{
+
+
+    height:70px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-bottom:20px;
+
+
+}
+
+@media(max-width:600px){
+
+.header{
+
+    height:60px;
+
+    margin-bottom:15px;
+
+}
+
+}
+
+.header h1{
+
+    font-size:38px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ffffff,
+        #67e8f9,
+        #a78bfa
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+
+    text-shadow:
+    0 5px 20px rgba(103,232,249,.35);
+
+
+    animation:
+    titleGlow 2s ease-in-out infinite;
+
+}
+
+
+
+@keyframes titleGlow{
+
+    0%{
+        filter:drop-shadow(0 0 5px rgba(103,232,249,.3));
+    }
+
+
+    50%{
+        filter:drop-shadow(0 0 20px rgba(167,139,250,.8));
+    }
+
+
+    100%{
+        filter:drop-shadow(0 0 5px rgba(103,232,249,.3));
+    }
+
+}
+
+
+
+
+.input-area{
+
+
+    padding:20px;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+
+.input-row{
+
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+
+input{
+
+
+    flex:1;
+
+    height:50px;
+
+    border-radius:15px;
+
+    border:1px solid var(--border);
+
+    background:rgba(0,0,0,.3);
+
+    color:white;
+
+    padding:0 15px;
+
+    font-size:16px;
+
+    outline:none;
+
+
+}
+
+
+
+input:focus{
+
+
+    box-shadow:
+    0 0 20px var(--cyan);
+
+
+}
+
+
+
+
+
+button{
+
+
+    border:none;
+
+    border-radius:15px;
+
+    padding:0 20px;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+
+}
+
+
+
+
+button:hover{
+
+
+    transform:translateY(-3px);
+
+}
+
+
+
+
+
+.enter-btn{
+
+
+    background:
+    linear-gradient(135deg,var(--purple),var(--cyan));
+
+    box-shadow:
+    0 0 20px var(--cyan);
+
+}
+
+
+
+
+.scan-btn{
+
+    background:
+    linear-gradient(135deg,var(--green),var(--cyan));
+
+}
+
+
+
+
+.search-btn{
+
+    background:
+    linear-gradient(135deg,var(--orange),var(--red));
+
+}
+
+
+
+
+
+.main{
+
+display:flex;
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+
+
+
+
+.section{
+
+
+    padding:20px;
+
+
+}
+
+
+
+
+
+.section h2{
+
+
+    margin-bottom:15px;
+
+    color:var(--cyan);
+
+
+}
+
+
+
+
+
+
+
+.results{
+
+
+    min-height:350px;
+
+
+}
+
+
+
+
+.product{
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px;
+
+    margin-bottom:10px;
+
+    background:
+    rgba(255,255,255,.08);
+
+
+    border-radius:15px;
+
+
+}
+
+
+
+
+
+.product button{
+
+
+    height:35px;
+
+    background:var(--green);
+
+    color:black;
+
+
+}
+
+
+
+
+
+
+
+
+.cart{
+
+width:100%;
+
+}
+
+
+
+.cart-header,
+.cart-row{
+
+
+    display:grid;
+
+    grid-template-columns:
+
+    2fr .7fr .8fr .8fr;
+
+
+    padding:12px;
+
+    align-items:center;
+
+
+}
+
+
+
+.cart-header{
+
+
+    color:var(--cyan);
+
+    border-bottom:
+
+    1px solid var(--border);
+
+
+}
+
+
+
+
+.cart-row{
+
+
+    background:
+
+    rgba(255,255,255,.06);
+
+    margin-top:8px;
+
+    border-radius:12px;
+
+
+}
+
+
+
+
+.qty-control{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:6px;
+
+}
+
+
+.qty-control button{
+
+    width:32px;
+
+    height:32px;
+
+    padding:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:18px;
+
+    background:var(--purple);
+
+    border-radius:8px;
+
+}
+
+
+.qty-number{
+
+    min-width:25px;
+
+    text-align:center;
+
+    font-weight:bold;
+
+    font-size:16px;
+
+}
+
+
+
+
+.total-box{
+
+
+    margin-top:20px;
+
+    padding:15px;
+
+
+}
+
+
+
+
+.total-line{
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:8px;
+
+
+}
+
+
+
+
+.grand{
+
+
+    font-size:24px;
+
+    color:var(--green);
+
+    text-shadow:
+
+    0 0 15px var(--green);
+
+
+}
+
+
+
+
+
+
+
+.actions{
+
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:20px;
+
+
+}
+
+
+
+
+.save{
+
+
+    flex:1;
+
+    height:55px;
+
+    background:
+
+    linear-gradient(135deg,#00ff9d,#00aaff);
+
+
+}
+
+
+
+
+
+.print{
+
+
+    flex:1;
+
+    height:55px;
+
+    background:
+
+    linear-gradient(135deg,var(--purple),var(--cyan));
+
+
+}
+
+
+
+
+
+
+.bottom-actions{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:20px;
+
+}
+
+
+.bottom-actions button{
+
+    height:50px;
+
+    flex:1;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        rgba(99,102,241,.25),
+        rgba(34,211,238,.25)
+    );
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+    backdrop-filter:blur(10px);
+
+
+    color:white;
+
+
+    font-size:15px;
+
+}
+
+
+@media(max-width:600px){
+
+.bottom-actions{
+
+    flex-direction:column;
+
+}
+
+
+.bottom-actions button{
+
+    width:100%;
+
+    height:55px;
+
+}
+
+}
+
+
+/* ==============================
+   DYNAMIC RESULT PANEL
+============================== */
+
+
+.result-panel{
+
+
+overflow:hidden;
+
+transition:.35s ease;
+
+
+}
+
+
+.result-panel.collapsed{
+
+
+height:0;
+
+padding-top:0;
+
+padding-bottom:0;
+
+opacity:0;
+
+margin:0;
+
+
+}
+
+
+
+.result-panel.show{
+
+
+height:auto;
+
+min-height:100px;
+
+padding:20px;
+
+opacity:1;
+
+
+}
+
+
+
+
+
+.results-item{
+
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+
+padding:12px;
+
+
+background:
+
+rgba(255,255,255,.08);
+
+
+
+border-radius:12px;
+
+
+margin-bottom:8px;
+
+
+}
+
+
+
+
+.results-item button{
+
+background:
+linear-gradient(
+135deg,
+var(--green),
+var(--cyan)
+);
+
+}
+
+
+
+@media(max-width:800px){
+
+
+.main{
+
+
+    grid-template-columns:1fr;
+
+}
+
+
+.input-row{
+
+
+    flex-direction:column;
+
+
+}
+
+
+button{
+
+
+    height:50px;
+
+
+}
+
+
+.cart-header,
+.cart-row{
+
+
+    font-size:13px;
+
+
+}
+
+
+}
+
+
+
+.scanner-modal{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+
+    background:rgba(0,0,0,.8);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+
+
+.scanner-modal.active{
+
+    display:flex;
+
+}
+
+
+
+.scanner-box{
+
+    width:90%;
+
+    max-width:450px;
+
+    padding:20px;
+
+    text-align:center;
+
+}
+
+
+
+#scannerVideo{
+
+    width:100%;
+
+    height:300px;
+
+    border-radius:20px;
+
+    background:black;
+
+}
+
+
+
+#closeScanner{
+
+    margin-top:15px;
+
+    height:45px;
+
+    width:100%;
+
+    background:#ff416c;
+
+}
+
+
+#oldInvoiceSearch{
+
+    width:100%;
+    margin:15px 0;
+}
+
+
+.old-bill-item{
+
+    padding:12px;
+
+font-size:14px;
+
+    background:
+    rgba(255,255,255,.1);
+
+    border-radius:10px;
+
+    margin-top:10px;
+
+}
+
+
+/* ==============================
+   OLD BILL SEARCH RESULT
+============================== */
+
+
+#oldBillResults{
+
+    margin-top:20px;
+
+    max-height:350px;
+
+    overflow-y:auto;
+
+    padding-right:8px;
+
+}
+
+
+
+.old-bill-item{
+
+
+display:flex;
+
+flex-direction:column;
+
+gap:8px;
+
+
+background:
+
+linear-gradient(
+135deg,
+rgba(0,234,255,.15),
+rgba(139,92,255,.15)
+);
+
+
+border-radius:15px;
+
+
+padding:15px;
+
+
+margin-bottom:12px;
+
+
+}
+
+
+.old-bill-item:hover{
+
+
+    border-color:#00ff9d;
+
+
+    transform:translateY(-2px);
+
+
+}
+
+
+
+
+.old-bill-item button{
+
+
+    margin-top:10px;
+
+
+    height:35px;
+
+
+    width:100%;
+
+
+    background:
+linear-gradient(
+135deg,
+var(--green),
+var(--cyan)
+);
+
+
+    color:black;
+
+
+}
+
+
+
+/* Scrollbar */
+
+
+#oldBillResults::-webkit-scrollbar{
+
+
+    width:8px;
+
+
+}
+
+
+#oldBillResults::-webkit-scrollbar-track{
+
+
+    background:
+    rgba(255,255,255,.05);
+
+
+    border-radius:10px;
+
+
+}
+
+
+
+#oldBillResults::-webkit-scrollbar-thumb{
+
+
+    background:#00eaff;
+
+
+    border-radius:10px;
+
+
+}
+
+
+
+/* ==============================
+   OLD BILL SEARCH MODAL
+============================== */
+
+
+#oldBillsPanel
+{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    z-index:9999;
+    padding:15px;
+}
+
+
+#oldBillsPanel.active
+{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+
+/* MAIN BOX */
+
+#oldBillsPanel .scanner-box
+{
+
+    width:100%;
+
+    max-width:900px;
+
+    max-height:95vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:20px;
+
+}
+
+
+
+/* TITLE */
+
+#oldBillsPanel h2
+{
+    flex-shrink:0;
+
+    text-align:center;
+
+    color:var(--cyan);
+
+    margin-bottom:15px;
+
+}
+
+
+
+/* FILTER AREA */
+
+#oldBillsPanel input
+{
+
+    width:100%;
+
+    height:45px;
+
+    margin-bottom:10px;
+
+    flex-shrink:0;
+
+}
+
+
+
+
+#findOldBillBtn
+{
+
+    height:45px;
+
+    flex-shrink:0;
+
+    background:
+    linear-gradient(
+    135deg,
+    #ffcc00,
+    #ff416c
+    );
+
+}
+
+
+
+/* ==============================
+   RESULT AREA
+============================== */
+
+
+#oldBillResults
+{
+
+    margin-top:15px;
+
+    flex:1;
+
+    overflow-y:auto;
+
+    min-height:150px;
+
+    padding:5px;
+
+}
+
+
+
+/* BILL CARD */
+
+
+.old-bill-item
+{
+
+    background:
+    linear-gradient(
+    135deg,
+    rgba(0,234,255,.15),
+    rgba(139,92,255,.20)
+    );
+
+
+    border:1px solid rgba(255,255,255,.15);
+
+
+    border-radius:15px;
+
+
+    padding:15px;
+
+
+    margin-bottom:12px;
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+
+}
+
+
+
+
+.old-bill-info
+{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+    font-size:15px;
+
+}
+
+
+
+.old-bill-item button
+{
+
+    width:120px;
+
+    height:40px;
+
+
+    background:
+    linear-gradient(
+    135deg,
+    #00ff9d,
+    #00aaff
+    );
+
+
+    color:black;
+
+}
+
+
+
+/* CLOSE BUTTON */
+
+#closeOldBills
+{
+
+    height:45px;
+
+    margin-top:15px;
+
+    flex-shrink:0;
+
+
+    background:
+    linear-gradient(
+    135deg,
+    #ff416c,
+    #ff1744
+    );
+
+}
+
+
+
+
+
+/* MOBILE */
+
+@media(max-width:600px)
+{
+
+
+#oldBillsPanel
+{
+    padding:5px;
+}
+
+
+
+#oldBillsPanel .scanner-box
+{
+
+    width:100%;
+
+    height:95vh;
+
+    padding:15px;
+
+}
+
+
+
+.old-bill-item
+{
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+}
+
+
+
+.old-bill-item button
+{
+
+    width:100%;
+
+    margin-top:10px;
+
+}
+
+
+}
+
+
+
+#oldBillResultPanel .scanner-box{
+
+    width:95%;
+    max-width:900px;
+    height:90vh;
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+#oldBillResults{
+
+    flex:1;
+    overflow-y:auto;
+
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+
+    padding:10px;
+}
+
+
+
+.old-bill-item{
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    padding:18px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.old-bill-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+.old-bill-item button{
+
+    width:110px;
+    height:42px;
+
+    background:linear-gradient(135deg,#00ff9d,#00c8ff);
+
+    color:#000;
+}
+
+/* =====================================
+   OLD BILL RESULT RESPONSIVE PANEL
+===================================== */
+
+#oldBillResultPage
+{
+    padding:15px;
+}
+
+
+#oldBillResultPage .scanner-box
+{
+    width:100%;
+    max-width:900px;
+
+    height:90vh;
+    max-height:90vh;
+
+    display:flex;
+    flex-direction:column;
+
+    padding:20px;
+
+    border-radius:20px;
+}
+
+
+
+/* Title */
+
+#oldBillResultPage h2
+{
+    flex-shrink:0;
+
+    text-align:center;
+
+    margin-bottom:15px;
+
+    color:var(--cyan);
+
+}
+
+
+
+/* Result Scroll Area */
+
+#oldBillResultPage #oldBillResults
+{
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:10px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+
+
+/* Bill Card */
+
+#oldBillResultPage .old-bill-item
+{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(0,234,255,.15),
+        rgba(139,92,255,.20)
+    );
+
+    border:1px solid rgba(255,255,255,.15);
+
+    transition:.25s;
+
+}
+
+
+
+#oldBillResultPage .old-bill-item:hover
+{
+    transform:translateY(-3px);
+
+    border-color:var(--cyan);
+
+}
+
+
+
+/* Bill Information */
+
+#oldBillResultPage .old-bill-info
+{
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+    font-size:15px;
+
+}
+
+
+
+/* Load Bill Button */
+
+#oldBillResultPage .old-bill-item button
+{
+    width:120px;
+
+    height:42px;
+
+    flex-shrink:0;
+
+    border-radius:12px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #00ff9d,
+        #00aaff
+    );
+
+    color:black;
+
+}
+
+
+
+/* CLOSE BUTTON */
+
+#closeResultPage
+{
+    margin-top:15px;
+
+    height:50px;
+
+    width:100%;
+
+    flex-shrink:0;
+
+    border-radius:15px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff416c,
+        #ff1744
+    );
+
+    color:white;
+
+    font-size:16px;
+
+    box-shadow:
+    0 0 20px rgba(255,65,108,.6);
+
+}
+
+
+
+
+/* MOBILE */
+
+@media(max-width:600px)
+{
+
+
+#oldBillResultPage
+{
+    padding:5px;
+}
+
+
+
+#oldBillResultPage .scanner-box
+{
+    width:100%;
+
+    height:95vh;
+
+    padding:15px;
+
+}
+
+
+
+#oldBillResultPage .old-bill-item
+{
+    flex-direction:column;
+
+    align-items:stretch;
+
+}
+
+
+
+#oldBillResultPage .old-bill-item button
+{
+    width:100%;
+
+    margin-top:10px;
+
+}
+
+
+
+#closeResultPage
+{
+    height:45px;
+
+}
+
+
+}
+
+
+
+@media(max-width:600px){
+
+    .input-area{
+        padding:15px;
+    }
+
+
+    .input-row{
+
+        flex-direction:column;
+
+        gap:12px;
+
+    }
+
+
+    input{
+
+        width:100%;
+
+        height:60px;
+
+        font-size:18px;
+
+        border-radius:18px;
+
+        padding:0 18px;
+
+    }
+
+
+    button{
+
+        width:100%;
+
+        height:55px;
+
+        font-size:16px;
+
+        border-radius:18px;
+
+    }
+
+
+    .enter-btn,
+    .scan-btn,
+    .search-btn{
+
+        height:55px;
+
+    }
+
+}
+
+html{
+
+    -webkit-text-size-adjust:none;
+
+    text-size-adjust:none;
+
+}
+
+
+.bottom-dock{
+
+
+position:fixed;
+
+bottom:15px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+
+width:calc(100% - 30px);
+
+max-width:600px;
+
+
+display:flex;
+
+justify-content:space-around;
+
+align-items:center;
+
+
+padding:10px;
+
+
+background:
+
+rgba(255,255,255,.15);
+
+
+backdrop-filter:
+
+blur(20px);
+
+
+-webkit-backdrop-filter:
+
+blur(20px);
+
+
+
+border:
+
+1px solid rgba(255,255,255,.25);
+
+
+
+border-radius:25px;
+
+
+
+box-shadow:
+
+0 20px 50px rgba(0,0,0,.35);
+
+
+
+z-index:999;
+
+
+}
+
+
+
+.bottom-dock button{
+
+
+flex:1;
+
+
+height:60px;
+
+
+margin:0 3px;
+
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+
+gap:5px;
+
+
+background:
+
+transparent;
+
+
+color:white;
+
+
+font-size:14px;
+
+
+border-radius:18px;
+
+
+}
+
+
+
+.bottom-dock button span{
+
+
+font-size:22px;
+
+
+}
+
+
+
+.bottom-dock button small{
+
+
+font-size:12px;
+
+font-weight:600;
+
+
+}
+
+
+
+
+.bottom-dock button:hover{
+
+
+background:
+
+rgba(255,255,255,.18);
+
+
+transform:translateY(-5px);
+
+
+}
+
+.pos-container{
+
+padding-bottom:120px;
+
+}
+
+
+
+@media(max-width:600px){
+
+.cart-header{
+
+    display:none;
+
+}
+
+
+.cart-row{
+
+    grid-template-columns:
+    1fr;
+
+    gap:8px;
+
+    padding:15px;
+
+}
+
+
+.cart-row span{
+
+    display:flex;
+
+    justify-content:space-between;
+
+}
+
+
+.qty-control{
+
+    justify-content:flex-start;
+
+}
+
+
+}
+
+
+select{
+
+    height:50px;
+
+    border-radius:15px;
+
+    border:1px solid var(--border);
+
+    background:rgba(0,0,0,.3);
+
+    color:white;
+
+    padding:0 15px;
+
+    font-size:16px;
+
+}
+
+
+/* POS TOAST MESSAGE */
+
+.pos-toast{
+
+    position:fixed;
+
+    top:20px;
+
+    left:50%;
+
+    transform:translateX(-50%) translateY(-100px);
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(0,255,180,.9),
+        rgba(0,180,255,.9)
+    );
+
+    color:#000;
+
+    padding:15px 25px;
+
+    border-radius:15px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,.5);
+
+    z-index:99999;
+
+    transition:.4s;
+
+}
+
+
+.pos-toast.show{
+
+    transform:
+    translateX(-50%)
+    translateY(0);
+
+}
+
+
+.pos-toast.error{
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff416c,
+        #ff4b2b
+    );
+
+    color:white;
+
+}
+
+
+.pos-toast.info{
+
+    background:
+    linear-gradient(
+        135deg,
+        #38bdf8,
+        #2563eb
+    );
+
+    color:white;
+
+}
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="pos-container">
+
+
+
+<div class="header glass">
+
+<h1>RK POS</h1>
+
+</div>
+
+
+
+
+<div class="input-area glass">
+
+
+<div class="input-row">
+
+
+<input id="barcodeInput"
+placeholder="Scan Barcode..."
+autocomplete="off">
+
+
+
+
+<button id="barcodeBtn" class="enter-btn">
+ENTER
+</button>
+
+
+<button id="scanBtn" class="scan-btn">
+📷 SCAN
+</button>
+
+
+</div>
+
+
+
+
+<div class="input-row">
+
+
+<input id="searchInput"
+placeholder="Search Product Description..."
+autocomplete="off">
+
+
+<button id="searchBtn" class="search-btn">
+SEARCH
+</button>
+
+
+</div>
+
+<div class="input-row">
+
+<label>
+Printer Width:
+</label>
+
+<select id="printerWidth">
+    <option value="58">58 mm</option>
+    <option value="80">80 mm</option>
+</select>
+
+
+<label>
+Print Mode:
+</label>
+
+<select id="printMode">
+
+    <option value="browser">
+        Browser Printer
+    </option>
+
+
+    <option value="escpos">
+        Thermal ESC/POS
+    </option>
+
+</select>
+
+</div>
+
+</div>
+
+
+
+
+
+
+<div class="main">
+
+
+
+
+
+<div id="resultPanel" class="result-panel glass collapsed">
+
+
+<h2>Product Results</h2>
+
+
+<div id="results">
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="section glass cart">
+
+
+<h2>Current Bill</h2>
+
+
+
+<div class="cart-header">
+
+<span>Item</span>
+
+<span>Qty</span>
+
+<span>Price</span>
+
+<span>Total</span>
+
+
+</div>
+
+
+
+<div id="cart">
+
+
+</div>
+
+
+
+
+
+<div class="total-box">
+
+
+<div class="total-line">
+
+<span>Subtotal</span>
+
+<b>0.00</b>
+
+</div>
+
+
+
+<div class="total-line">
+
+<span>Tax</span>
+
+<b>0.00</b>
+
+</div>
+
+
+
+<div class="total-line grand">
+
+<span>Total</span>
+
+<b>0.00</b>
+
+</div>
+
+
+</div>
+
+
+
+<div class="actions">
+
+
+
+
+
+
+<button id="printBtn" class="print">
+
+BILL
+
+</button>
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div class="bottom-dock">
+
+
+<button onclick="window.location.replace('./index.html')">
+<span>🏠</span>
+<small>Home</small>
+</button>
+
+
+<button id="reprintBtn">
+
+<span>🧾</span>
+<small>Reprint</small>
+
+</button>
+
+
+<button id="oldBillsBtn">
+
+<span>🔍</span>
+<small>Old Bills</small>
+
+</button>
+
+
+<button id="reportBtn" onclick="location.href='billing-summary.html'">
+
+<span>📊</span>
+<small>Report</small>
+
+</button>
+
+
+</div>
+</div>
+
+
+
+
+<div id="scannerModal" class="scanner-modal">
+
+    <div class="scanner-box glass">
+
+        <h2>Scan Barcode</h2>
+
+        <video id="scannerVideo"></video>
+
+        <button id="closeScanner">
+            CLOSE
+        </button>
+
+    </div>
+
+</div>
+
+
+<div id="oldBillsPanel" class="scanner-modal">
+    <div class="scanner-box glass">
+
+        <h2>Search Old Bills</h2>
+
+        <input id="oldInvoiceSearch" placeholder="Invoice No">
+
+        <input type="date" id="billFromDate">
+
+        <input type="date" id="billToDate">
+
+        <input type="number" id="amountFrom" placeholder="Amount From">
+
+        <input type="number" id="amountTo" placeholder="Amount To">
+
+        <button id="findOldBillBtn">SEARCH</button>
+
+        <button id="closeOldBills">CLOSE</button>
+
+    </div>
+</div>
+
+
+<!-- OLD BILL RESULT PAGE -->
+
+<div id="oldBillResultPage" class="scanner-modal">
+
+    <div class="scanner-box glass">
+
+        <h2>Select Bill</h2>
+
+        <div id="oldBillResults"></div>
+
+        <button id="closeResultPage">
+            CLOSE
+        </button>
+
+    </div>
+
+</div>
+
+<div id="posToast" class="pos-toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://unpkg.com/@zxing/library@latest"></script>
+
+<script src="printer-settings.js"></script>
+
+<script src="BrowserPrinter.js"></script>
+
+<script src="ESCPosPrinter.js"></script>
+
+<script src="PrinterService.js"></script>
+
+<script src="PrintManager.js"></script>
+
+<script src="pos.js"></script>
+
+
+
+</body>
+
+</html>

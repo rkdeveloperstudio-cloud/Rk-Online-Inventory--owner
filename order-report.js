@@ -727,7 +727,7 @@ async function shareSelected() {
 
 
     let message =
-        "RK Inventory Reorder List\n\n";
+        "Inventory Reorder List\n\n";
 
 
 

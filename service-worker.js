@@ -1,16 +1,29 @@
-const CACHE_NAME = "inventory-pwa-v7";
+const CACHE_NAME = "inventory-pwa-v9";
 
 const STATIC_FILES = [
   "./",
   "./index.html",
   "./sales.html",
   "./inventory.html",
+  "./returns.html",
   "./order-report.html",
+  "./pos.html",
+  "./billing-summary.html",
 
   "./app.js",
   "./sales.js",
   "./inventory.js",
-  "./js/order-report.js",
+  "./returns.js",
+  "./order-report.js",
+  "./pos.js",
+  "./billing-summary.js",
+
+  // Printer files
+  "./PrinterService.js",
+  "./printer-settings.js",
+  "./PrintManager.js",
+  "./BrowserPrinter.js",
+  "./ESCPosPrinter.js",
 
   "./style.css",
   "./manifest.json",
@@ -19,6 +32,8 @@ const STATIC_FILES = [
   "./icon-512.PNG",
   "./apple-touch-icon.PNG"
 ];
+
+
 
 // =====================
 // INSTALL EVENT

@@ -1,0 +1,769 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Billing Summary</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+
+<style>
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+
+body{
+
+    min-height:100vh;
+
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+    color:white;
+
+    background:
+    linear-gradient(
+        135deg,
+        #020617,
+        #0f766e,
+        #0369a1,
+        #1e293b
+    );
+
+    background-size:300% 300%;
+
+    animation:
+    gradientMove 15s ease infinite;
+
+}
+
+
+
+@keyframes gradientMove{
+
+0%{
+    background-position:0% 50%;
+}
+
+50%{
+    background-position:100% 50%;
+}
+
+100%{
+    background-position:0% 50%;
+}
+
+}
+
+
+
+
+.container{
+
+    width:100%;
+
+    min-height:100vh;
+
+    padding:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+
+
+
+.card{
+
+    width:100%;
+
+    max-width:520px;
+
+    padding:28px;
+
+
+    background:
+    rgba(255,255,255,.12);
+
+
+    backdrop-filter:
+    blur(25px);
+
+
+    -webkit-backdrop-filter:
+    blur(25px);
+
+
+
+    border:
+    1px solid rgba(255,255,255,.25);
+
+
+
+    border-radius:30px;
+
+
+
+    box-shadow:
+
+    0 30px 70px rgba(0,0,0,.45),
+
+    inset 0 1px 1px rgba(255,255,255,.3);
+
+}
+
+
+
+
+
+h2{
+
+    text-align:center;
+
+    font-size:32px;
+
+    margin-bottom:25px;
+
+
+    text-shadow:
+
+    0 5px 15px rgba(0,0,0,.4);
+
+}
+
+
+
+
+.summary{
+
+
+    display:grid;
+
+    gap:15px;
+
+}
+
+
+
+
+.summary-box{
+
+
+    padding:20px;
+
+
+    border-radius:22px;
+
+
+    background:
+
+    rgba(255,255,255,.10);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.20);
+
+
+
+    box-shadow:
+
+    inset 0 1px 1px rgba(255,255,255,.25);
+
+}
+
+
+
+
+.summary-box span{
+
+    font-size:14px;
+
+    opacity:.75;
+
+}
+
+
+
+.summary-box b{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:26px;
+
+}
+
+
+
+
+
+button{
+
+
+    width:100%;
+
+
+    margin-top:20px;
+
+
+    padding:16px;
+
+
+    border:none;
+
+
+    border-radius:20px;
+
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,.35),
+        rgba(255,255,255,.15)
+    );
+
+
+
+    color:white;
+
+
+    font-size:17px;
+
+
+    font-weight:700;
+
+
+    cursor:pointer;
+
+
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.25);
+
+
+
+    transition:.3s;
+
+}
+
+
+
+
+button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+
+
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+
+
+
+
+.table-box{
+
+    margin-top:25px;
+
+    overflow-x:auto;
+
+}
+
+
+table{
+
+    width:100%;
+
+    min-width:500px;
+
+    border-collapse:collapse;
+
+}
+
+
+
+th{
+
+    background:
+    rgba(255,255,255,.25);
+
+    padding:12px 8px;
+
+    text-align:left;
+
+    font-size:13px;
+
+}
+
+
+
+td{
+
+    padding:12px 8px;
+
+    border-bottom:
+    1px solid rgba(255,255,255,.2);
+
+    font-size:13px;
+
+}
+
+
+
+th:first-child,
+td:first-child{
+
+    width:100px;
+
+}
+
+
+
+th:nth-child(2),
+td:nth-child(2){
+
+    width:220px;
+
+}
+
+
+
+th:nth-child(3),
+td:nth-child(3){
+
+    width:60px;
+
+    text-align:center;
+
+}
+
+
+
+th:nth-child(4),
+td:nth-child(4){
+
+    width:100px;
+
+    text-align:right;
+
+}
+
+
+.footer{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    opacity:.7;
+
+    font-size:13px;
+
+}
+
+
+
+
+@media(max-width:600px){
+
+
+.card{
+
+    padding:20px;
+
+}
+
+
+
+h2{
+
+    font-size:27px;
+
+}
+
+
+
+.summary-box b{
+
+    font-size:23px;
+
+}
+
+
+
+}
+
+
+
+.pos-toast{
+
+    position:fixed;
+
+    top:25px;
+
+    left:50%;
+
+    transform:translateX(-50%) translateY(-120px);
+
+    padding:15px 30px;
+
+    border-radius:16px;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    color:white;
+
+    background:
+    linear-gradient(
+        135deg,
+        #0ea5e9,
+        #2563eb
+    );
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.5);
+
+    backdrop-filter:blur(15px);
+
+    z-index:99999;
+
+    transition:.35s ease;
+
+}
+
+
+.pos-toast.show{
+
+    transform:
+    translateX(-50%)
+    translateY(0);
+
+}
+
+
+.pos-toast.success{
+
+    background:
+    linear-gradient(
+        135deg,
+        #22c55e,
+        #06b6d4
+    );
+
+}
+
+
+
+.pos-toast.error{
+
+    background:
+    linear-gradient(
+        135deg,
+        #ef4444,
+        #f97316
+    );
+
+}
+
+
+.pos-toast.warning{
+
+    background:
+    linear-gradient(
+        135deg,
+        #f59e0b,
+        #ef4444
+    );
+
+}
+
+
+.confirm-box{
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+background:
+rgba(0,0,0,.75);
+
+z-index:99999;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+
+
+.confirm-box.active{
+
+display:flex;
+
+}
+
+
+
+.confirm-panel{
+
+background:
+rgba(20,60,100,.8);
+
+backdrop-filter:blur(20px);
+
+padding:30px;
+
+border-radius:25px;
+
+text-align:center;
+
+box-shadow:
+0 20px 60px black;
+
+}
+
+
+
+.confirm-panel button{
+
+width:120px;
+
+height:45px;
+
+margin:15px;
+
+border-radius:15px;
+
+border:none;
+
+font-weight:bold;
+
+}
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+
+<h2>
+🧾 Billing Summary
+</h2>
+
+
+
+
+<div class="summary">
+
+
+
+<div class="summary-box">
+
+<span>
+Report Period
+</span>
+
+<b id="reportPeriod">
+Loading...
+</b>
+
+</div>
+
+
+
+
+
+<div class="summary-box">
+
+<span>
+Pending Bills
+</span>
+
+<b id="totalBills">
+0
+</b>
+
+</div>
+
+
+
+
+
+<div class="summary-box">
+
+<span>
+Grand Total
+</span>
+
+<b id="totalSales">
+AED 0.00
+</b>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<button id="detailBtn">
+
+📋 Load Detailed Summary
+
+</button>
+
+
+
+
+
+
+
+
+<div class="table-box" id="detailBox">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Barcode</th>
+
+<th>Description</th>
+
+<th>Qty</th>
+
+<th>Amount</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="detailBody">
+
+</tbody>
+
+
+</table>
+
+</div>
+
+
+
+
+
+
+
+
+<button id="reconcileBtn">
+
+✅ Reconcile & Print PDF
+
+</button>
+
+<button id="backBtn">
+🏠 Home
+</button>
+
+
+<div class="footer">
+
+RK Billing System
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+<div id="confirmBox" class="confirm-box">
+
+<div class="confirm-panel">
+
+<h3 id="confirmMessage"></h3>
+
+<div>
+<button id="confirmYes">
+YES
+</button>
+
+<button id="confirmNo">
+NO
+</button>
+</div>
+
+</div>
+
+</div>
+
+
+
+<div id="posToast" class="pos-toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+<script src="billing-summary.js"></script>
+
+
+
+
+</body>
+
+</html>
+

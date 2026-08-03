@@ -1432,11 +1432,11 @@ document
 .getElementById("oldBillsBtn")
 .onclick=function()
 {
+    clearOldBillSearch();
 
-document
-.getElementById("oldBillsPanel")
-.classList.add("active");
-
+    document
+    .getElementById("oldBillsPanel")
+    .classList.add("active");
 };
 
 document
@@ -2330,4 +2330,18 @@ function showToast(message,type="success")
 
     },2500);
 
+}
+
+
+function clearOldBillSearch()
+{
+    document.getElementById("oldInvoiceSearch").value = "";
+
+    document.getElementById("billFromDate").value = "";
+
+    document.getElementById("billToDate").value = "";
+
+    document.getElementById("amountFrom").value = "";
+
+    document.getElementById("amountTo").value = "";
 }

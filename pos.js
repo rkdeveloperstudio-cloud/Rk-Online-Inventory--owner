@@ -1443,11 +1443,11 @@ document
 .getElementById("closeOldBills")
 .onclick=function()
 {
+    clearOldBillSearch();
 
-document
-.getElementById("oldBillsPanel")
-.classList.remove("active");
-
+    document
+    .getElementById("oldBillsPanel")
+    .classList.remove("active");
 };
 
 async function searchOldBills()
@@ -1569,7 +1569,7 @@ document.getElementById("oldBillsPanel").classList.remove("active");
 document.getElementById("oldBillResultPage").classList.add("active");
 
 showOldBillCards(bills);
-
+clearOldBillSearch();
 }
 
 

@@ -817,54 +817,47 @@ async function shareSelected() {
 
 async function generatePDF() {
 
-
     let rows = [];
-
 
     document
         .querySelectorAll("#productTable tr")
         .forEach(row => {
 
-
             let checkbox =
                 row.querySelector(".rowSelect");
-
 
             if (
                 checkbox &&
                 checkbox.checked
             ) {
 
-
                 let cells =
                     row.querySelectorAll("td");
-
 
                 let reorder =
                     row.querySelector(".reorder").value;
 
-
-
                 rows.push({
 
                     supplier:
-                        cells[1].innerText,
+                        cells[1].innerText.trim(),
 
                     description:
-                        cells[2].innerText,
+                        cells[2].innerText.trim(),
 
                     qty:
                         reorder
 
                 });
 
-
             }
-
 
         });
 
 
+    //=========================================================
+    // CHECK SELECTION
+    //=========================================================
 
     if (rows.length === 0) {
 
@@ -876,14 +869,25 @@ async function generatePDF() {
 
     }
 
+
+    //=========================================================
+    // GROUP ITEMS BY SUPPLIER
+    //=========================================================
+
     let grouped = {};
 
 
     rows.forEach(item => {
 
+        if (!item.supplier) {
+            return;
+        }
+
 
         if (!grouped[item.supplier]) {
+
             grouped[item.supplier] = [];
+
         }
 
 
@@ -894,53 +898,64 @@ async function generatePDF() {
 
         ]);
 
-
     });
 
+
+    //=========================================================
+    // PDF LIBRARY
+    //=========================================================
 
     const { jsPDF } =
         window.jspdf;
 
 
-
-    let doc =
-        new jsPDF();
-
-
-
-    doc.text(
-        "AL QARAT SHOPPING CENTER REORDER LIST",
-        14,
-        15
-    );
-
-
-
-    let y = 30;
-
-
-
-
-
+    //=========================================================
+    // CREATE ONE PDF PER SUPPLIER
+    //=========================================================
 
     for (let supplier in grouped) {
 
 
+        let doc =
+            new jsPDF();
+
+
+        //=====================================================
+        // TITLE
+        //=====================================================
+
         doc.text(
-            supplier,
+            "AL QARAT SHOPPING CENTER",
             14,
-            y
+            15
         );
 
 
-        y += 5;
+        doc.text(
+            "REORDER LIST",
+            14,
+            23
+        );
 
 
+        //=====================================================
+        // SUPPLIER NAME
+        //=====================================================
+
+        doc.text(
+            "Supplier: " + supplier,
+            14,
+            32
+        );
+
+
+        //=====================================================
+        // TABLE
+        //=====================================================
 
         doc.autoTable({
 
-            startY: y,
-
+            startY: 40,
 
             head: [
 
@@ -951,79 +966,94 @@ async function generatePDF() {
 
             ],
 
-
             body:
                 grouped[supplier]
 
         });
 
 
+        //=====================================================
+        // SAFE PDF FILE NAME
+        //=====================================================
 
-        y =
-            doc.lastAutoTable.finalY + 15;
-
-
-
-    }
-
-
-
-
-    let pdfBlob =
-        doc.output("blob");
+        let safeSupplierName =
+            supplier
+                .replace(/[\\/:*?"<>|]/g, "")
+                .trim();
 
 
+        if (safeSupplierName === "") {
 
-    let pdfFile =
-        new File(
-            [
-                pdfBlob
-            ],
-            "Reorder_List.pdf",
-            {
-                type: "application/pdf"
-            }
-        );
+            safeSupplierName =
+                "Unknown_Supplier";
+
+        }
 
 
+        let fileName =
+            safeSupplierName +
+            ".pdf";
 
 
-    if (
-        navigator.canShare &&
-        navigator.canShare(
-            {
+        //=====================================================
+        // SHARE / SAVE
+        //=====================================================
+
+        let pdfBlob =
+            doc.output("blob");
+
+
+        let pdfFile =
+            new File(
+                [
+                    pdfBlob
+                ],
+                fileName,
+                {
+                    type:
+                        "application/pdf"
+                }
+            );
+
+
+        //=====================================================
+        // SHARE IF SUPPORTED
+        //=====================================================
+
+        if (
+            navigator.canShare &&
+            navigator.canShare({
                 files: [
                     pdfFile
                 ]
             })
-    ) {
+        ) {
 
+            await navigator.share({
 
-        await navigator.share({
+                files: [
+                    pdfFile
+                ],
 
-            files: [
-                pdfFile
-            ],
+                title:
+                    supplier + " Reorder",
 
-            title:
-                "RK Inventory Reorder",
+                text:
+                    "Reorder List - " +
+                    supplier
 
-            text:
-                "Reorder List"
+            });
 
-        });
+        }
 
+        else {
+
+            doc.save(
+                fileName
+            );
+
+        }
 
     }
-    else {
-
-
-        doc.save(
-            "Reorder_List.pdf"
-        );
-
-
-    }
-
 
 }

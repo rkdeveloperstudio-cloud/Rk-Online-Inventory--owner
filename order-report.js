@@ -815,6 +815,7 @@ async function shareSelected() {
 
 }
 
+
 async function generatePDF() {
 
     let rows = [];
@@ -834,8 +835,13 @@ async function generatePDF() {
                 let cells =
                     row.querySelectorAll("td");
 
+                let reorderInput =
+                    row.querySelector(".reorder");
+
                 let reorder =
-                    row.querySelector(".reorder").value;
+                    reorderInput
+                        ? reorderInput.value
+                        : "";
 
                 rows.push({
 
@@ -861,9 +867,7 @@ async function generatePDF() {
 
     if (rows.length === 0) {
 
-        alert(
-            "Please select items"
-        );
+        alert("Please select items");
 
         return;
 
@@ -871,7 +875,7 @@ async function generatePDF() {
 
 
     //=========================================================
-    // GROUP ITEMS BY SUPPLIER
+    // GROUP BY SUPPLIER
     //=========================================================
 
     let grouped = {};
@@ -910,10 +914,21 @@ async function generatePDF() {
 
 
     //=========================================================
-    // CREATE ONE PDF PER SUPPLIER
+    // GET SUPPLIER LIST
     //=========================================================
 
-    for (let supplier in grouped) {
+    let suppliers =
+        Object.keys(grouped);
+
+
+    //=========================================================
+    // GENERATE EACH SUPPLIER PDF
+    //=========================================================
+
+    for (let i = 0; i < suppliers.length; i++) {
+
+        let supplier =
+            suppliers[i];
 
 
         let doc =
@@ -921,7 +936,7 @@ async function generatePDF() {
 
 
         //=====================================================
-        // TITLE
+        // HEADER
         //=====================================================
 
         doc.text(
@@ -937,10 +952,6 @@ async function generatePDF() {
             23
         );
 
-
-        //=====================================================
-        // SUPPLIER NAME
-        //=====================================================
 
         doc.text(
             "Supplier: " + supplier,
@@ -958,12 +969,10 @@ async function generatePDF() {
             startY: 40,
 
             head: [
-
                 [
                     "Description",
                     "Reorder Qty"
                 ]
-
             ],
 
             body:
@@ -973,7 +982,7 @@ async function generatePDF() {
 
 
         //=====================================================
-        // SAFE PDF FILE NAME
+        // SAFE FILE NAME
         //=====================================================
 
         let safeSupplierName =
@@ -991,69 +1000,37 @@ async function generatePDF() {
 
 
         let fileName =
-            safeSupplierName +
-            ".pdf";
+            safeSupplierName + ".pdf";
 
 
         //=====================================================
-        // SHARE / SAVE
+        // DOWNLOAD PDF
         //=====================================================
 
-        let pdfBlob =
-            doc.output("blob");
-
-
-        let pdfFile =
-            new File(
-                [
-                    pdfBlob
-                ],
-                fileName,
-                {
-                    type:
-                        "application/pdf"
-                }
-            );
+        doc.save(fileName);
 
 
         //=====================================================
-        // SHARE IF SUPPORTED
+        // SMALL DELAY
         //=====================================================
+        // Helps browsers process multiple downloads.
 
-        if (
-            navigator.canShare &&
-            navigator.canShare({
-                files: [
-                    pdfFile
-                ]
-            })
-        ) {
-
-            await navigator.share({
-
-                files: [
-                    pdfFile
-                ],
-
-                title:
-                    supplier + " Reorder",
-
-                text:
-                    "Reorder List - " +
-                    supplier
-
-            });
-
-        }
-
-        else {
-
-            doc.save(
-                fileName
-            );
-
-        }
+        await new Promise(
+            resolve =>
+                setTimeout(resolve, 500)
+        );
 
     }
 
+
+    //=========================================================
+    // COMPLETED
+    //=========================================================
+
+    alert(
+        suppliers.length +
+        " supplier PDF(s) generated."
+    );
+
 }
+
